@@ -25,22 +25,24 @@ public class LoginPage extends AnyPage {
   private WebElement loginPageCloseButton;
   
   public LoginPage setUsernameField(String text) {
+	usernameField.clear();  
     usernameField.sendKeys(text);
     return this;
   }
 
   public LoginPage setPasswordField(String text) {
-    passwordField.sendKeys(text);
+	passwordField.clear();  
+	passwordField.sendKeys(text);
     return this;
   }
 
   public void clickLoginPageCloseButton() {
-	  loginPageCloseButton.click();
+    loginPageCloseButton.click();
   }
   
   public void clickSubmitButton() {
-	    submitButton.click();
-	  }
+    submitButton.click();
+  }
 	   
   
 

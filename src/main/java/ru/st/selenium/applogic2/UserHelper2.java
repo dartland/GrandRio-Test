@@ -37,6 +37,14 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
   @Override
   public boolean isNotLoggedIn() {
+	  boolean notLogged = pages.loginPage.waitPageLoaded();
+	  if(notLogged) {pages.loginPage.clickLoginPageCloseButton();}
+	  
+    return notLogged;
+  }
+  
+  @Override
+  public boolean isNotLoggedInInception() {
     return pages.loginPage.waitPageLoaded();
   }
   

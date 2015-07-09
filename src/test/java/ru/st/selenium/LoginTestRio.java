@@ -9,7 +9,7 @@ public class LoginTestRio extends ru.st.selenium.pages.TestBase {
 
   @BeforeMethod
   public void mayBeLogout() {
-    if (app.getUserHelper().isNotLoggedIn()) {
+    if (app.getUserHelper().isNotLoggedInInception()) {
       return;
     }
     app.getUserHelper().logout();
@@ -23,17 +23,17 @@ public class LoginTestRio extends ru.st.selenium.pages.TestBase {
     app.getUserHelper().loginAs(user);
     assertTrue(app.getUserHelper().isLoggedInAs(user));
     app.getUserHelper().logout();
+
   }
 
   @Test
   public void testLoginFailed() throws Exception {
-	  
-//    User user = new User().setLogin("dartland@rambler.ru").setPassword("wrong");
-//    app.getUserHelper().logout(); //выходим из профиля пользователя
-//    app.getNavigationHelper().gotoLoginPage();
-//    Thread.sleep(1000);
-//    app.getUserHelper().loginAs(user);
-//    assertTrue(app.getUserHelper().isNotLoggedIn());
+	
+	User user = new User().setLogin("dartland@rambler.ru").setPassword("wrong"); 
+    app.getNavigationHelper().gotoLoginPage();
+    app.getUserHelper().loginAs(user);
+    assertTrue(app.getUserHelper().isNotLoggedIn());
+        
     
   }
   
