@@ -66,7 +66,7 @@
 				<user.username></user.username>
 				<user.password></user.password>
 				<grid2.hub></grid2.hub>
-				<site.url>http://localhost/php4dvd/</site.url>
+				<site.url>https://test.grandrio.com/ru</site.url>
 				<browser.name>firefox</browser.name>
 				<browser.version></browser.version>
 				<browser.platform></browser.platform>
@@ -82,7 +82,7 @@
 				<user.username></user.username>
 				<user.password></user.password>
 				<grid2.hub></grid2.hub>
-				<site.url>http://localhost/php4dvd/</site.url>
+				<site.url>https://test.grandrio.com/ru</site.url>
 				<browser.name>ie</browser.name>
 				<browser.version></browser.version>
 				<browser.platform></browser.platform>

@@ -22,28 +22,12 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
   }
   
   @Override
-  public void gotoUserProfilePage() {
-    pages.internalPage.ensurePageLoaded().clickUserProfilePage();
-    //driver.findElement(By.cssSelector("nav a[href $= '?go=profile']"))
-    //  .click();
-    // openRelativeUrl("?go=profile");
-  }
+  public void gotoLoginPage() {
+    pages.externalPage.ensurePageLoaded().clickEnterLink();
 
-  @Override
-  public void gotoUserManagementPage() {
-    pages.internalPage.ensurePageLoaded().clickUserManagementLink();
-    //driver.findElement(By.cssSelector("nav a[href $= '?go=users']"))
-    //  .click();
-    //openRelativeUrl("?go=users");
-  }
+}  
+  
+  
 
-  @Override
-  public void gotoHomePage() {
-    pages.internalPage.ensurePageLoaded().clickHomeLink();
-	//pages.internalPage.clickHomeLink();  
-    //driver.findElement(By.cssSelector("nav a[href $= 'http://localhost/php4dvd/']"))
-    //  .click();
-    //openRelativeUrl("?go=users");
-  }  
   
 }

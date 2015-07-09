@@ -21,7 +21,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
   @Override
   public void logout() {
     pages.internalPage.ensurePageLoaded()
-      .clickLogoutLink();
+      .clickExitButton();
   }
 
   @Override
@@ -32,7 +32,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
   @Override
   public boolean isLoggedInAs(User user) {
     return isLoggedIn()
-        && getLoggedUser().getLogin().equals(user.getLogin());
+    		&& getLoggedUser().getEmail().equals(user.getLogin()); // у нас логин = email
   }
 
   @Override
@@ -42,12 +42,13 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
   
   private User getLoggedUser() {
     UserProfilePage userProfile = pages.internalPage.ensurePageLoaded()
-      .clickUserProfilePage()
+      .clickMyProfileButton()
       .ensurePageLoaded();
+       //System.out.println(userProfile.getEmail());
     return new User()
-      .setLogin(userProfile.getUsername())
-      .setEmail(userProfile.getEmail())
-      .setRole(userProfile.getRole());
+      //.setLogin(userProfile.getFirstName())
+      .setEmail(userProfile.getEmail());
+      
   }
 
 }

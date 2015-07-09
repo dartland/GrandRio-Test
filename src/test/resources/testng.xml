@@ -4,11 +4,11 @@
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.st.selenium.AddFilmOk"/>
-		    <class name="ru.st.selenium.AddFilmFailure"/> 
+		    <class name="ru.st.selenium.LoginTestRio"/>
+		    <!--  <class name="ru.st.selenium.AddFilmFailure"/> 
 		    <class name="ru.st.selenium.RemoveFilm"/>
 		    <class name="ru.st.selenium.NotFoundFilm"/> 
-		    <class name="ru.st.selenium.FoundFilm"/>
+		    <class name="ru.st.selenium.FoundFilm"/>  -->
 		</classes>
 	</test>  
 </suite>

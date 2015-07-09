@@ -12,14 +12,17 @@ public class LoginPage extends AnyPage {
 		super(pages);
 	}
 
-	@FindBy(name = "username")
-	private WebElement usernameField;
+  @FindBy(id = "lgin")
+  private WebElement usernameField;
 
-  @FindBy(name = "password")
+  @FindBy(id = "psw")
   private WebElement passwordField;
 
-  @FindBy(name = "submit")
+  @FindBy(id = "lg_in_btn")
   private WebElement submitButton;
+  
+  @FindBy(id = "lim_close")
+  private WebElement loginPageCloseButton;
   
   public LoginPage setUsernameField(String text) {
     usernameField.sendKeys(text);
@@ -31,13 +34,19 @@ public class LoginPage extends AnyPage {
     return this;
   }
 
-  public void clickSubmitButton() {
-    submitButton.click();
+  public void clickLoginPageCloseButton() {
+	  loginPageCloseButton.click();
   }
+  
+  public void clickSubmitButton() {
+	    submitButton.click();
+	  }
+	   
+  
 
   public LoginPage ensurePageLoaded() {
     super.ensurePageLoaded();
-    wait.until(presenceOfElementLocated(By.id("loginform")));
+    wait.until(presenceOfElementLocated(By.id("frgt_psw"))); //Забыли пароль?
     return this;
   }
 }

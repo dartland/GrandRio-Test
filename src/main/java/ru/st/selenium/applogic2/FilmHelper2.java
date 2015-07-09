@@ -37,20 +37,7 @@ public class FilmHelper2 extends DriverBasedHelper implements FilmHelper {
 	
   }
   
-  @Override
-  public void create(Film film) {
-    //отправляемся на домашнюю старницу с фильмами
-	HomePage home = pages.internalPage.ensurePageLoaded()
-			.clickHomeLink()
-		    .ensurePageLoaded();
-	//нажали кнопку add movie и грузим страничку 
-	AddFilmPage addFilm = home.clickMovieButton().ensurePageLoaded();
-			addFilm.setFilmName(film.getTitle())
-			.setYear(film.getYear())
-			.setAlsoKnownAs(film.getNotes())
-			.clickSubmitButton();   
-  }
-  
+ 
   @Override
   public boolean isEmptySearchResult(String stringText) {
     return pages.homePage.ensurePageLoaded().getEmptySearchText().equals(stringText);
@@ -77,16 +64,6 @@ public class FilmHelper2 extends DriverBasedHelper implements FilmHelper {
   }
   
  
-  @Override
-  public void delete(Film film) {
-	//отправляемся на домашнюю старницу с фильмами
-	HomePage home = pages.internalPage.ensurePageLoaded()
-			.clickHomeLink()
-		    .ensurePageLoaded();
-	FilmContentPage filmContent = home.getFilmContent(film.getTitle()).ensurePageLoaded();
-	filmContent.clickRemoveButton().ensurePageLoaded();
-  }
-
 
 
 }

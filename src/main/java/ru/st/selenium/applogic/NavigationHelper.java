@@ -4,8 +4,9 @@ public interface NavigationHelper {
 
   void openMainPage();
   void openRelativeUrl(String url);
-  void gotoUserProfilePage();
-  void gotoUserManagementPage();
-  void gotoHomePage();
+//  void gotoUserProfilePage();
+//  void gotoUserManagementPage();
+//  void gotoHomePage();
+  void gotoLoginPage();
 
 }

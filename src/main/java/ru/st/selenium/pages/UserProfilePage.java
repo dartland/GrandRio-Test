@@ -13,24 +13,24 @@ public class UserProfilePage extends InternalPage {
 		super(pages);
 	}
 	
-	@FindBy(name = "username")
-	private WebElement usernameField;
+	@FindBy(id = "firstName")
+	private WebElement firstNameField;
 	
-  @FindBy(name = "email")
+  @FindBy(id = "email")
   private WebElement emailField;
   
-  @FindBy(name = "password")
-  private WebElement passwordField;
+  @FindBy(id = "newpass")
+  private WebElement newPasswordField;
   
-  @FindBy(name = "password2")
-  private WebElement password2Field;
+  @FindBy(name = "reppass")
+  private WebElement repeatPasswordField;
   
-  private Select permissionDropdown() {
-    return new Select(driver.findElement(By.name("permission")));
-  }
+//  private Select permissionDropdown() {
+//    return new Select(driver.findElement(By.name("permission")));
+//  }
   
-  public String getUsername() {
-    return usernameField.getAttribute("value");
+  public String getFirstName() {
+    return firstNameField.getAttribute("value");
   }
 
   public String getEmail() {
@@ -42,23 +42,23 @@ public class UserProfilePage extends InternalPage {
     return this;
   }
 
-  public UserProfilePage setPassword(String text) {
-    passwordField.sendKeys(text);
+  public UserProfilePage setNewPassword(String text) {
+    newPasswordField.sendKeys(text);
     return this;
   }
 
-  public UserProfilePage setPassword2(String text) {
-    password2Field.sendKeys(text);
+  public UserProfilePage setRepeatPassword(String text) {
+    repeatPasswordField.sendKeys(text);
     return this;
   }
 
-  public String getRole() {
-    return permissionDropdown().getFirstSelectedOption().getText();
-  }
+//  public String getRole() {
+//    return permissionDropdown().getFirstSelectedOption().getText();
+//  }
 
   public UserProfilePage ensurePageLoaded() {
     super.ensurePageLoaded();
-    wait.until(presenceOfElementLocated(By.cssSelector("input#username[disabled]")));
+    wait.until(presenceOfElementLocated(By.id("save_data"))); //кнопка "сохранить данные"
     return this;
   }
 }
