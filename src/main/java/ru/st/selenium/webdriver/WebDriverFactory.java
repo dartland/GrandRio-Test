@@ -57,8 +57,7 @@ public class WebDriverFactory {
 	 * 
 	 * @return RemoteWebDriver
 	 */
-	public static WebDriver getInstance(String gridHubUrl, Browser browser,
-			String username, String password) {
+	public static WebDriver getInstance(String gridHubUrl, Browser browser, String username, String password) {
 
 		WebDriver webDriver = null;
 
@@ -75,24 +74,20 @@ public class WebDriverFactory {
 			capability = DesiredCapabilities.chrome();
 		} else if (FIREFOX.equals(browserName)) {
 			capability = DesiredCapabilities.firefox();
-			
+
 			FirefoxProfile ffProfile = new FirefoxProfile();
 
 			// Authenication Hack for Firefox
 			if (username != null && password != null) {
-				ffProfile.setPreference("network.http.phishy-userpass-length",
-						255);
+				ffProfile.setPreference("network.http.phishy-userpass-length", 255);
 				capability.setCapability(FirefoxDriver.PROFILE, ffProfile);
 			}
-			
+
 			capability.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 		} else if (INTERNET_EXPLORER.equals(browserName)) {
 
 			capability = DesiredCapabilities.internetExplorer();
-			capability
-			.setCapability(
-					InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-					true);
+			capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 		} else if (SAFARI.equals(browserName)) {
 			capability = DesiredCapabilities.safari();
 		} else {
@@ -100,8 +95,7 @@ public class WebDriverFactory {
 			capability = DesiredCapabilities.htmlUnit();
 			// HTMLunit Check
 			if (username != null && password != null) {
-				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver
-						.create(username, password);
+				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver.create(username, password);
 			} else {
 				webDriver = new HtmlUnitDriver(true);
 			}
@@ -109,8 +103,7 @@ public class WebDriverFactory {
 			return webDriver;
 		}
 
-		capability = setVersionAndPlatform(capability, browser.getVersion(),
-				browser.getPlatform());
+		capability = setVersionAndPlatform(capability, browser.getVersion(), browser.getPlatform());
 
 		// Create Remote WebDriver
 		try {
@@ -133,8 +126,7 @@ public class WebDriverFactory {
 	 * 
 	 * @return WebDriver instance
 	 */
-	public static WebDriver getInstance(String browser, String username,
-			String password) {
+	public static WebDriver getInstance(String browser, String username, String password) {
 
 		if (webDriver != null) {
 			return webDriver;
@@ -149,8 +141,7 @@ public class WebDriverFactory {
 
 			// Authenication Hack for Firefox
 			if (username != null && password != null) {
-				ffProfile.setPreference("network.http.phishy-userpass-length",
-						255);
+				ffProfile.setPreference("network.http.phishy-userpass-length", 255);
 			}
 
 			webDriver = new FirefoxDriver(ffProfile);
@@ -165,8 +156,7 @@ public class WebDriverFactory {
 
 			// HTMLunit Check
 			if (username != null && password != null) {
-				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver
-						.create(username, password);
+				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver.create(username, password);
 			} else {
 				webDriver = new HtmlUnitDriver(true);
 			}
@@ -187,8 +177,8 @@ public class WebDriverFactory {
 	 * 
 	 * @return DesiredCapabilities
 	 */
-	private static DesiredCapabilities setVersionAndPlatform(
-			DesiredCapabilities capability, String version, String platform) {
+	private static DesiredCapabilities setVersionAndPlatform(DesiredCapabilities capability, String version,
+			String platform) {
 		if (MAC.equalsIgnoreCase(platform)) {
 			capability.setPlatform(Platform.MAC);
 		} else if (LINUX.equalsIgnoreCase(platform)) {

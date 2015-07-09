@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class Page {
 
 	protected WebDriver driver;
-  protected WebDriverWait wait;
-  protected PageManager pages;
+	protected WebDriverWait wait;
+	protected PageManager pages;
 
 	/*
 	 * Constructor injecting the WebDriver interface
@@ -21,10 +21,10 @@ public abstract class Page {
 	 * @param webDriver
 	 */
 	public Page(PageManager pages) {
-	  this.pages = pages;
-    driver = pages.getWebDriver();
-    wait= new WebDriverWait(driver, 10); 
-    driver.manage().window().maximize();
+		this.pages = pages;
+		driver = pages.getWebDriver();
+		wait = new WebDriverWait(driver, 10);
+		driver.manage().window().maximize();
 	}
 
 	public WebDriver getWebDriver() {
@@ -36,15 +36,15 @@ public abstract class Page {
 	}
 
 	public Page ensurePageLoaded() {
-	  return this;
+		return this;
 	}
 
-  public boolean waitPageLoaded() {
-    try {
-      ensurePageLoaded();
-      return true;
-    } catch (TimeoutException to) {
-      return false;
-    }
-  }
+	public boolean waitPageLoaded() {
+		try {
+			ensurePageLoaded();
+			return true;
+		} catch (TimeoutException to) {
+			return false;
+		}
+	}
 }

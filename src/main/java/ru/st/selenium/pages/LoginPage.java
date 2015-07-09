@@ -12,43 +12,42 @@ public class LoginPage extends AnyPage {
 		super(pages);
 	}
 
-  @FindBy(id = "lgin")
-  private WebElement usernameField;
+	@FindBy(id = "lgin")
+	private WebElement usernameField;
 
-  @FindBy(id = "psw")
-  private WebElement passwordField;
+	@FindBy(id = "psw")
+	private WebElement passwordField;
 
-  @FindBy(id = "lg_in_btn")
-  private WebElement submitButton;
-  
-  @FindBy(id = "lim_close")
-  private WebElement loginPageCloseButton;
-  
-  public LoginPage setUsernameField(String text) {
-	usernameField.clear();  
-    usernameField.sendKeys(text);
-    return this;
-  }
+	@FindBy(id = "lg_in_btn")
+	private WebElement submitButton;
 
-  public LoginPage setPasswordField(String text) {
-	passwordField.clear();  
-	passwordField.sendKeys(text);
-    return this;
-  }
+	@FindBy(id = "lim_close")
+	private WebElement loginPageCloseButton;
 
-  public void clickLoginPageCloseButton() {
-    loginPageCloseButton.click();
-  }
-  
-  public void clickSubmitButton() {
-    submitButton.click();
-  }
-	   
-  
+	public LoginPage setUsernameField(String text) {
+		usernameField.clear();
+		usernameField.sendKeys(text);
+		return this;
+	}
 
-  public LoginPage ensurePageLoaded() {
-    super.ensurePageLoaded();
-    wait.until(presenceOfElementLocated(By.id("frgt_psw"))); //Забыли пароль?
-    return this;
-  }
+	public LoginPage setPasswordField(String text) {
+		passwordField.clear();
+		passwordField.sendKeys(text);
+		return this;
+	}
+
+	public void clickLoginPageCloseButton() {
+		loginPageCloseButton.click();
+	}
+
+	public void clickSubmitButton() {
+		submitButton.click();
+	}
+
+	public LoginPage ensurePageLoaded() {
+		super.ensurePageLoaded();
+		wait.until(presenceOfElementLocated(By.id("frgt_psw"))); // Забыли
+																	// пароль?
+		return this;
+	}
 }

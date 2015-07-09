@@ -5,60 +5,61 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 public class UserProfilePage extends InternalPage {
 
 	public UserProfilePage(PageManager pages) {
 		super(pages);
 	}
-	
+
 	@FindBy(id = "firstName")
 	private WebElement firstNameField;
-	
-  @FindBy(id = "email")
-  private WebElement emailField;
-  
-  @FindBy(id = "newpass")
-  private WebElement newPasswordField;
-  
-  @FindBy(name = "reppass")
-  private WebElement repeatPasswordField;
-  
-//  private Select permissionDropdown() {
-//    return new Select(driver.findElement(By.name("permission")));
-//  }
-  
-  public String getFirstName() {
-    return firstNameField.getAttribute("value");
-  }
 
-  public String getEmail() {
-    return emailField.getAttribute("value");
-  }
+	@FindBy(id = "email")
+	private WebElement emailField;
 
-  public UserProfilePage setEmailField(String text) {
-    emailField.sendKeys(text);
-    return this;
-  }
+	@FindBy(id = "newpass")
+	private WebElement newPasswordField;
 
-  public UserProfilePage setNewPassword(String text) {
-    newPasswordField.sendKeys(text);
-    return this;
-  }
+	@FindBy(name = "reppass")
+	private WebElement repeatPasswordField;
 
-  public UserProfilePage setRepeatPassword(String text) {
-    repeatPasswordField.sendKeys(text);
-    return this;
-  }
+	// private Select permissionDropdown() {
+	// return new Select(driver.findElement(By.name("permission")));
+	// }
 
-//  public String getRole() {
-//    return permissionDropdown().getFirstSelectedOption().getText();
-//  }
+	public String getFirstName() {
+		return firstNameField.getAttribute("value");
+	}
 
-  public UserProfilePage ensurePageLoaded() {
-    super.ensurePageLoaded();
-    wait.until(presenceOfElementLocated(By.id("save_data"))); //кнопка "сохранить данные"
-    return this;
-  }
+	public String getEmail() {
+		return emailField.getAttribute("value");
+	}
+
+	public UserProfilePage setEmailField(String text) {
+		emailField.sendKeys(text);
+		return this;
+	}
+
+	public UserProfilePage setNewPassword(String text) {
+		newPasswordField.sendKeys(text);
+		return this;
+	}
+
+	public UserProfilePage setRepeatPassword(String text) {
+		repeatPasswordField.sendKeys(text);
+		return this;
+	}
+
+	// public String getRole() {
+	// return permissionDropdown().getFirstSelectedOption().getText();
+	// }
+
+	public UserProfilePage ensurePageLoaded() {
+		super.ensurePageLoaded();
+		wait.until(presenceOfElementLocated(By.id("save_data"))); // кнопка
+																	// "сохранить
+																	// данные"
+		return this;
+	}
 }
