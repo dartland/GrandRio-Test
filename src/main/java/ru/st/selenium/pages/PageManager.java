@@ -12,7 +12,7 @@ public class PageManager {
 	public InternalPage internalPage;
 	public ExternalPage externalPage;
 	public UserProfilePage userProfilePage;
-	public UserManagementPage userManagementPage;
+	public RegistrationPage registrationPage;
 
 	public PageManager(WebDriver driver) {
 		this.driver = driver;
@@ -21,7 +21,7 @@ public class PageManager {
 		internalPage = initElements(new InternalPage(this));
 		externalPage = initElements(new ExternalPage(this));
 		userProfilePage = initElements(new UserProfilePage(this));
-		userManagementPage = initElements(new UserManagementPage(this));
+		registrationPage = initElements(new RegistrationPage(this));
 
 	}
 

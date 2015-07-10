@@ -12,8 +12,22 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
 	@Override
 	public void loginAs(User user) {
-		pages.loginPage.ensurePageLoaded().setUsernameField(user.getLogin()).setPasswordField(user.getPassword())
-				.clickSubmitButton();
+		pages.loginPage.ensurePageLoaded()
+			.setUsernameField(user.getLogin())
+			.setPasswordField(user.getPassword())
+			.clickSubmitButton();
+	}
+	
+	@Override
+	public void addNewUserAs(User user) {
+		pages.registrationPage.ensurePageLoaded()//;
+//		.setEmailField(user.getEmail())
+//		.setPasswordField(user.getPassword())
+//		.setCurrencyRUBRadio()
+//		.setiAgreeRulesBox()
+//		.setIAgree18Box()
+		.clickRegisrationSubmitButton();
+		
 	}
 
 	@Override
@@ -28,11 +42,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
 	@Override
 	public boolean isLoggedInAs(User user) {
-		return isLoggedIn() && getLoggedUser().getEmail().equals(user.getLogin()); // у
-																					// нас
-																					// логин
-																					// =
-																					// email
+		return isLoggedIn() && getLoggedUser().getEmail().equals(user.getLogin()); // у нас логин = email
 	}
 
 	@Override
@@ -57,6 +67,17 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 				// .setLogin(userProfile.getFirstName())
 				.setEmail(userProfile.getEmail());
 
+	}
+
+	
+	@Override
+	public boolean isNotLoggedInRegistrationPage() {
+		boolean notLogged = pages.registrationPage.waitPageLoaded();
+		if (notLogged) {
+			pages.registrationPage.clickRegistrationPageCloseButton();
+		}
+
+		return notLogged;
 	}
 
 }

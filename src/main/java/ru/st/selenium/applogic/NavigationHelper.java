@@ -8,4 +8,6 @@ public interface NavigationHelper {
 
 	void gotoLoginPage();
 
+	void gotoRegistationPage();
+
 }

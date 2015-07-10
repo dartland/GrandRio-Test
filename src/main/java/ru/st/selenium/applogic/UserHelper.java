@@ -16,4 +16,8 @@ public interface UserHelper {
 
 	boolean isNotLoggedInInception();
 
+	void addNewUserAs(User user);
+
+	boolean isNotLoggedInRegistrationPage();
+
 }

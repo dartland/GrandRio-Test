@@ -17,24 +17,25 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		app.getUserHelper().logout();
 	}
 
-	@Test
-	public void AddNewUserOK() throws Exception {
-		User user = new User().setLogin("dartland@rambler.ru").setPassword("123456");
-		app.getNavigationHelper().gotoLoginPage();
-		app.getUserHelper().loginAs(user);
-		assertTrue(app.getUserHelper().isLoggedInAs(user));
-		app.getUserHelper().logout();
-
-	}
-
 //	@Test
-//	public void AddNewUserFailed() throws Exception {
-//
-//		User user = new User().setLogin("dartland@rambler.ru").setPassword("wrong");
+//	public void AddNewUserOK() throws Exception {
+//		User user = new User().setLogin("dartland@rambler.ru").setPassword("123456");
 //		app.getNavigationHelper().gotoLoginPage();
 //		app.getUserHelper().loginAs(user);
-//		assertTrue(app.getUserHelper().isNotLoggedIn());
+//		assertTrue(app.getUserHelper().isLoggedInAs(user));
+//		app.getUserHelper().logout();
 //
 //	}
+
+	@Test
+	public void AddNewUserFailed() throws Exception {
+
+		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
+		app.getNavigationHelper().gotoRegistationPage();
+		app.getUserHelper().addNewUserAs(user);
+		Thread.sleep(3000);
+		//assertTrue(app.getUserHelper().isNotLoggedInRegistrationPage());
+
+	}
 
 }

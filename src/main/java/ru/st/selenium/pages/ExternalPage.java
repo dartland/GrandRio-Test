@@ -39,4 +39,9 @@ public class ExternalPage extends AnyPage {
 		// wait.until(alertIsPresent()).accept();
 		return pages.loginPage;
 	}
+
+	public void clickRegistrationLink() {
+		registrationButton.click();
+		
+	}
 }

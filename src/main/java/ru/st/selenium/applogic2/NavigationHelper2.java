@@ -27,4 +27,10 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 
 	}
 
+	@Override
+	public void gotoRegistationPage() {
+		pages.externalPage.ensurePageLoaded().clickRegistrationLink();
+		
+	}
+
 }
