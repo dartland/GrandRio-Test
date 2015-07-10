@@ -12,19 +12,20 @@ public class RegistrationPage extends AnyPage {
 		super(pages);
 	}
 
-	@FindBy(id = "reg_email")
+	@FindBy(xpath = "//form[@id='reg_form']//input[@name='email']")
 	private WebElement emailField;
+	// xpath = "//form[@id='reg_form']//input[@name='email']"
 
 	@FindBy(id = "reg_psw")
 	private WebElement passwordField;
 
-	@FindBy(id = "currency_RUB")
+	@FindBy(id = "uniform-currency_RUB")
 	private WebElement currencyRUBRadio;
 	
-	@FindBy(id = "i_agree")
+	@FindBy(id = "uniform-i_agree")
 	private WebElement iAgreeRulesBox;
 	
-	@FindBy(id = "i_agree_2")
+	@FindBy(id = "uniform-i_agree_2")
 	private WebElement iAgree18Box;
 	
 	@FindBy(css = ".rg_in_btn>input")

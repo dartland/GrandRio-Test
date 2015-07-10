@@ -20,12 +20,14 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	
 	@Override
 	public void addNewUserAs(User user) {
+		
+		System.out.println(user.getEmail());
 		pages.registrationPage.ensurePageLoaded()//;
-//		.setEmailField(user.getEmail())
-//		.setPasswordField(user.getPassword())
-//		.setCurrencyRUBRadio()
-//		.setiAgreeRulesBox()
-//		.setIAgree18Box()
+		.setEmailField(user.getEmail())
+		.setPasswordField(user.getPassword())
+		.setCurrencyRUBRadio()
+		.setiAgreeRulesBox()
+		.setIAgree18Box()
 		.clickRegisrationSubmitButton();
 		
 	}

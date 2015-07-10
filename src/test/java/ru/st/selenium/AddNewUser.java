@@ -33,8 +33,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
-		Thread.sleep(3000);
-		//assertTrue(app.getUserHelper().isNotLoggedInRegistrationPage());
+		assertTrue(app.getUserHelper().isNotLoggedInRegistrationPage());
 
 	}
 
