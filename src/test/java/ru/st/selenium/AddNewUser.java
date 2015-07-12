@@ -17,15 +17,17 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		app.getUserHelper().logout();
 	}
 
-//	@Test
-//	public void AddNewUserOK() throws Exception {
-//		User user = new User().setLogin("dartland@rambler.ru").setPassword("123456");
-//		app.getNavigationHelper().gotoLoginPage();
-//		app.getUserHelper().loginAs(user);
-//		assertTrue(app.getUserHelper().isLoggedInAs(user));
-//		app.getUserHelper().logout();
-//
-//	}
+	@Test
+	public void AddNewUserOK() throws Exception {
+		User user = new User().setEmail("dartland2@rambler.ru").setPassword("123456");
+		app.getNavigationHelper().gotoRegistationPage();
+		app.getUserHelper().addNewUserAs(user);
+		assertTrue(app.getUserHelper().isRegisteredIn());
+		
+		//Пожалуйста, проверьте почту и завершите процесс регистрации
+		//Достигнут максимум регистраций с адреса 109.229.68.160.
+
+	}
 
 	@Test
 	public void AddNewUserFailed() throws Exception {
@@ -33,7 +35,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
-		assertTrue(app.getUserHelper().isNotLoggedInRegistrationPage());
+		assertTrue(app.getUserHelper().isNotRegisteredIn());
 
 	}
 

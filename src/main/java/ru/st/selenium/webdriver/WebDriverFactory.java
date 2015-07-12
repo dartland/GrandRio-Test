@@ -76,8 +76,16 @@ public class WebDriverFactory {
 			capability = DesiredCapabilities.firefox();
 
 			FirefoxProfile ffProfile = new FirefoxProfile();
-
-			// Authenication Hack for Firefox
+			
+			//отключаем иконку режима чтения, а так же ее подсказки
+			ffProfile.setPreference("reader.parse-on-load.enabled", false);
+			ffProfile.setPreference("reader.parse-on-load.force-enabled ", false);
+			ffProfile.setPreference("browser.pocket.enabled", false);
+			capability.setCapability(FirefoxDriver.PROFILE, ffProfile);
+			
+			//
+			
+			// Authentication Hack for Firefox
 			if (username != null && password != null) {
 				ffProfile.setPreference("network.http.phishy-userpass-length", 255);
 				capability.setCapability(FirefoxDriver.PROFILE, ffProfile);
@@ -137,8 +145,13 @@ public class WebDriverFactory {
 
 		} else if (FIREFOX.equals(browser)) {
 
+						
 			FirefoxProfile ffProfile = new FirefoxProfile();
 
+			ffProfile.setPreference("reader.parse-on-load.enabled", false);
+			ffProfile.setPreference("reader.parse-on-load.force-enabled ", false);
+			//отключаем иконку режима чтения, а так же ее подсказки
+			
 			// Authenication Hack for Firefox
 			if (username != null && password != null) {
 				ffProfile.setPreference("network.http.phishy-userpass-length", 255);

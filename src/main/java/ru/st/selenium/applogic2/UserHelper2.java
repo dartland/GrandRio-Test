@@ -1,7 +1,10 @@
 package ru.st.selenium.applogic2;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
+
 import ru.st.selenium.applogic.UserHelper;
 import ru.st.selenium.model.User;
+import ru.st.selenium.pages.AlertPage;
 import ru.st.selenium.pages.UserProfilePage;
 
 public class UserHelper2 extends DriverBasedHelper implements UserHelper {
@@ -21,7 +24,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public void addNewUserAs(User user) {
 		
-		System.out.println(user.getEmail());
+		//System.out.println(user.getEmail());
 		pages.registrationPage.ensurePageLoaded()//;
 		.setEmailField(user.getEmail())
 		.setPasswordField(user.getPassword())
@@ -29,8 +32,10 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		.setiAgreeRulesBox()
 		.setIAgree18Box()
 		.clickRegisrationSubmitButton();
-		
 	}
+	
+	
+
 
 	@Override
 	public void logout() {
@@ -73,13 +78,26 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
 	
 	@Override
-	public boolean isNotLoggedInRegistrationPage() {
-		boolean notLogged = pages.registrationPage.waitPageLoaded();
-		if (notLogged) {
+	public boolean isNotRegisteredIn() {
+		boolean notRegistered = pages.registrationPage.waitPageLoaded();
+		if (notRegistered) {
 			pages.registrationPage.clickRegistrationPageCloseButton();
 		}
 
-		return notLogged;
+		return notRegistered;
+	}
+
+	@Override
+	public boolean isRegisteredIn() {
+
+		//pages.alertPage.ensurePageLoaded();
+		boolean alertIs = pages.alertPage.waitPageLoaded();
+		if (alertIs) {
+			pages.alertPage.clickAlertPageCloseButton();
+			pages.registrationPage.clickRegistrationPageCloseButton();
+		}
+
+		return alertIs;
 	}
 
 }

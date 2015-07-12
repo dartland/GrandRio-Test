@@ -18,6 +18,8 @@ public interface UserHelper {
 
 	void addNewUserAs(User user);
 
-	boolean isNotLoggedInRegistrationPage();
+	boolean isNotRegisteredIn(); 
+
+	boolean isRegisteredIn();
 
 }

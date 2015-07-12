@@ -60,13 +60,7 @@ public class ApplicationManager2 implements ApplicationManager {
 	public void stop() {
 		if (driver != null) {
 			driver.quit();
-			// корректное закрытие сайта и выход из драйвера
-			/*
-			 * driver.close();
-			 * 
-			 * try { Thread.sleep(5000); driver.quit(); } catch (Exception e) {
-			 * }
-			 */
+
 
 		}
 	}
