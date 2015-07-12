@@ -24,7 +24,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public void addNewUserAs(User user) {
 		
-		//System.out.println(user.getEmail());
+		closeAlertPage();
 		pages.registrationPage.ensurePageLoaded()//;
 		.setEmailField(user.getEmail())
 		.setPasswordField(user.getPassword())
@@ -35,6 +35,11 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	}
 	
 	
+	public void closeAlertPage() {
+		boolean alertIs = pages.alertPage.waitPageLoaded();
+		if (alertIs) pages.alertPage.clickAlertPageCloseButton();
+	
+	}
 
 
 	@Override
@@ -81,6 +86,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	public boolean isNotRegisteredIn() {
 		boolean notRegistered = pages.registrationPage.waitPageLoaded();
 		if (notRegistered) {
+			closeAlertPage();
 			pages.registrationPage.clickRegistrationPageCloseButton();
 		}
 
@@ -99,5 +105,8 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
 		return alertIs;
 	}
+	
+	
+	
 
 }

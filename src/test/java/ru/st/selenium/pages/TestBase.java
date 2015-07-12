@@ -13,11 +13,14 @@ public class TestBase {
 	@BeforeClass
 	public void init() {
 		app = new ApplicationManager2();
+		//тыкаю в какой-то элемент
+		app.getNavigationHelper().hideBannerLink();
 	}
 
 	@AfterSuite
 	public void stop() {
 		app.stop();
+		
 	}
 
 }

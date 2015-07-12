@@ -1,5 +1,7 @@
 package ru.st.selenium.applogic2;
 
+import org.openqa.selenium.interactions.Actions;
+
 import ru.st.selenium.applogic.NavigationHelper;
 
 public class NavigationHelper2 extends DriverBasedHelper implements NavigationHelper {
@@ -30,6 +32,12 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 	@Override
 	public void gotoRegistationPage() {
 		pages.externalPage.ensurePageLoaded().clickRegistrationLink();
+		
+	}
+
+	@Override
+	public void hideBannerLink() {
+		pages.externalPage.toHideBanner();
 		
 	}
 

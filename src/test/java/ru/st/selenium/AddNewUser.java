@@ -2,6 +2,7 @@ package ru.st.selenium;
 
 import static org.junit.Assert.assertTrue;
 
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,10 +12,12 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 
 	@BeforeMethod
 	public void mayBeLogout() {
+				       		
 		if (app.getUserHelper().isNotLoggedInInception()) {
 			return;
 		}
 		app.getUserHelper().logout();
+	
 	}
 
 	@Test
@@ -32,6 +35,8 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	@Test
 	public void AddNewUserFailed() throws Exception {
 
+		//app.getNavigationHelper().hideBannerLink();
+		
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);

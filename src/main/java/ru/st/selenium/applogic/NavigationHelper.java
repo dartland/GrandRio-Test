@@ -10,4 +10,6 @@ public interface NavigationHelper {
 
 	void gotoRegistationPage();
 
+	void hideBannerLink();
+
 }

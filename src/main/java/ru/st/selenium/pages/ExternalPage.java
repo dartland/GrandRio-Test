@@ -4,6 +4,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class ExternalPage extends AnyPage {
@@ -33,6 +34,9 @@ public class ExternalPage extends AnyPage {
 
 	@FindBy(id = "live_casino_btn")
 	private WebElement liveCasinoLink;
+	
+	@FindBy(id = "pp-bg")
+	private WebElement elementForHideBanner;	
 
 	public LoginPage clickEnterLink() {
 		enterLink.click();
@@ -44,4 +48,17 @@ public class ExternalPage extends AnyPage {
 		registrationButton.click();
 		
 	}
+	
+	public void toHideBanner() {	
+		Actions builder = new Actions(driver);
+		builder.build();
+		builder.moveToElement(elementForHideBanner).click().perform();
+		try {
+            Thread.sleep(1000); //жду пока он съебет
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		
+	}	
+		
 }
