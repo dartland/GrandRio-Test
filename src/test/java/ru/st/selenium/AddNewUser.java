@@ -22,7 +22,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 
 	@Test
 	public void AddNewUserOK() throws Exception {
-		User user = new User().setEmail("dartland2@rambler.ru").setPassword("123456");
+		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
 		assertTrue(app.getUserHelper().isRegisteredIn());

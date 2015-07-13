@@ -24,7 +24,9 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public void addNewUserAs(User user) {
 		
-		closeAlertPage();
+		//на этом этапе появляется возможность появления информационного окна
+		//поэтому нужно проверить его существовние (видимость)
+		if(pages.registrationPage.isAlertPresent()) {closeAlertPage();}
 		pages.registrationPage.ensurePageLoaded()//;
 		.setEmailField(user.getEmail())
 		.setPasswordField(user.getPassword())
@@ -86,7 +88,8 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	public boolean isNotRegisteredIn() {
 		boolean notRegistered = pages.registrationPage.waitPageLoaded();
 		if (notRegistered) {
-			closeAlertPage();
+			//закрываем информационное окошко, если оно появляется
+			if(pages.registrationPage.isAlertPresent()) {closeAlertPage();}
 			pages.registrationPage.clickRegistrationPageCloseButton();
 		}
 
@@ -96,10 +99,12 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public boolean isRegisteredIn() {
 
-		//pages.alertPage.ensurePageLoaded();
 		boolean alertIs = pages.alertPage.waitPageLoaded();
+		
 		if (alertIs) {
+			String alertString = pages.alertPage.getAlertText();
 			pages.alertPage.clickAlertPageCloseButton();
+			//тут нужно заделать проверку, какой алерт выскочил: если успешная регистрация, то не нажимать кнопку
 			pages.registrationPage.clickRegistrationPageCloseButton();
 		}
 

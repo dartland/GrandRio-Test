@@ -32,4 +32,13 @@ public class AlertPage extends AnyPage {
 		wait.until(presenceOfElementLocated(By.id("alert-message-holder"))); // Забыли пароль?
 		return this;
 	}
+
+
+
+	public String getAlertText() {
+		// TODO Auto-generated method stub
+		return messageHolder.getText();
+	}
+
+
 }

@@ -22,6 +22,7 @@ public class RegistrationPage extends AnyPage {
 	@FindBy(id = "uniform-currency_RUB")
 	private WebElement currencyRUBRadio;
 	
+	//@FindBy(id = "uniform-i_agree")
 	@FindBy(id = "uniform-i_agree")
 	private WebElement iAgreeRulesBox;
 	
@@ -34,14 +35,30 @@ public class RegistrationPage extends AnyPage {
 	@FindBy(id = "reg_modal_close")
 	private WebElement registrationPageCloseButton;
 	
-	
+//	//эти селекторы относятся к алерту
+//	@FindBy(id = "alert-message-holder")
+//	private WebElement messageHolder;
+//	//конец селекторов алерта
+//    проверка наличия/отсутсвия элемента
+//
+//    public boolean isAlertPresent() {
+//        try {
+//            messageHolder.getTagName();
+//            return true;
+//        } catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
 
 	// private Select permissionDropdown() {
 	// return new Select(driver.findElement(By.name("permission")));
 	// }
 	
-	public void clickRegistrationPageCloseButton() {
+	
+	
+	public ExternalPage clickRegistrationPageCloseButton() {
 		registrationPageCloseButton.click();
+		return pages.externalPage;
 	}
 	
 	public void clickRegisrationSubmitButton() {
@@ -54,12 +71,15 @@ public class RegistrationPage extends AnyPage {
 	}
 	
 	public RegistrationPage setiAgreeRulesBox() {
-		iAgreeRulesBox.click();
+		
+		// i_agree невидим, лежит на видимом iAgreeRulesBox, 
+		// поэтому чекаем по видимому, а реально чекается невидимый i_agree
+		if(!driver.findElement(By.id("i_agree")).isSelected())  iAgreeRulesBox.click(); 
 		return this;
 	}	
 	
 	public RegistrationPage setIAgree18Box() {
-		iAgree18Box.click();
+		if(!driver.findElement(By.id("i_agree_2")).isSelected())  iAgree18Box.click();
 		return this;
 	}
 	
@@ -79,5 +99,9 @@ public class RegistrationPage extends AnyPage {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.xpath(".//*[@id='reg_form']/h4"))); // надпись "регистрация"
 		return this;
+	}
+
+	public boolean isAlertPresent() {
+		return driver.findElement(By.id("alert-message-holder")).isDisplayed();
 	}
 }
