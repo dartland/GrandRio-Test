@@ -2,7 +2,12 @@ package ru.st.selenium.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,9 +41,9 @@ public class AlertPage extends AnyPage {
 
 
 	public String getAlertText() {
-		// TODO Auto-generated method stub
 		return messageHolder.getText();
 	}
+	
 
 
 }

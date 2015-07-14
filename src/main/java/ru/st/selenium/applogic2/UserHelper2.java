@@ -1,10 +1,8 @@
 package ru.st.selenium.applogic2;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 import ru.st.selenium.applogic.UserHelper;
 import ru.st.selenium.model.User;
-import ru.st.selenium.pages.AlertPage;
 import ru.st.selenium.pages.UserProfilePage;
 
 public class UserHelper2 extends DriverBasedHelper implements UserHelper {
@@ -103,14 +101,16 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		
 		if (alertIs) {
 			String alertString = pages.alertPage.getAlertText();
+			CharSequence checkMail = "ѕожалуйста, проверьте почту";
+			CharSequence maxRegistration = "ƒостигнут максимум регистраций";
 			pages.alertPage.clickAlertPageCloseButton();
-			//тут нужно заделать проверку, какой алерт выскочил: если успешна€ регистраци€, то не нажимать кнопку
-			pages.registrationPage.clickRegistrationPageCloseButton();
+			//System.out.println(alertString);
+			//тут нужно заделать проверку, какой алерт выскочил: если достигнут максимум, то нажать кнопку
+			if(alertString.contains(maxRegistration)) pages.registrationPage.clickRegistrationPageCloseButton();
 		}
-
+		
 		return alertIs;
 	}
-	
 	
 	
 

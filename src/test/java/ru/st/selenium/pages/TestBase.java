@@ -13,7 +13,7 @@ public class TestBase {
 	@BeforeClass
 	public void init() {
 		app = new ApplicationManager2();
-		//тыкаю в какой-то элемент
+		//тыкаю в какой-то элемент , чтобы свалил баннер
 		app.getNavigationHelper().hideBannerLink();
 	}
 

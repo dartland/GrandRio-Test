@@ -1,8 +1,6 @@
 package ru.st.selenium;
 
 import static org.junit.Assert.assertTrue;
-
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -43,5 +41,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		assertTrue(app.getUserHelper().isNotRegisteredIn());
 
 	}
+	
+	
 
 }
