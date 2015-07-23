@@ -1,6 +1,12 @@
 package ru.st.selenium.applogic2;
 
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import ru.st.selenium.applogic.UserHelper;
 import ru.st.selenium.model.User;
 import ru.st.selenium.pages.UserProfilePage;
@@ -110,6 +116,27 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		}
 		
 		return alertIs;
+	}
+
+	@Override
+	public void takeScreenShot() {
+		
+		String fileSeperator = System.getProperty("file.separator");
+		
+		try {
+
+
+			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			File targetFile = new File("C:"+fileSeperator
+					+"Screenshoots"+fileSeperator+"screenshot.jpg");
+			FileUtils.copyFile(screenshotFile, targetFile);
+
+			
+		} catch (Exception e) {
+			System.out.println("====>>> An exception occured while taking screenshot " + e.getCause());
+			
+		}
+		
 	}
 	
 	

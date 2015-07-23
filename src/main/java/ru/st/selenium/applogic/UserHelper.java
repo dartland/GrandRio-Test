@@ -22,4 +22,6 @@ public interface UserHelper {
 
 	boolean isRegisteredIn();
 
+	void takeScreenShot();
+
 }

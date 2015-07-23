@@ -35,7 +35,7 @@ public class ExternalPage extends AnyPage {
 	@FindBy(id = "live_casino_btn")
 	private WebElement liveCasinoLink;
 	
-	@FindBy(id = "pp-bg")
+	@FindBy(id = "menu_dimond")
 	private WebElement elementForHideBanner;	
 
 	public LoginPage clickEnterLink() {
