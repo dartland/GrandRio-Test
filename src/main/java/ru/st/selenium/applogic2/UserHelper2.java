@@ -6,6 +6,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.ITestResult;
 
 import ru.st.selenium.applogic.UserHelper;
 import ru.st.selenium.model.User;
@@ -109,23 +110,28 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 			String alertString = pages.alertPage.getAlertText();
 			CharSequence checkMail = "ѕожалуйста, проверьте почту";
 			CharSequence maxRegistration = "ƒостигнут максимум регистраций";
-			pages.alertPage.clickAlertPageCloseButton();
+			pages.alertPage.clickAlertPageCloseButton(); //в любом случае закрываем окно алерта
 			//System.out.println(alertString);
 			//тут нужно заделать проверку, какой алерт выскочил: если достигнут максимум, то нажать кнопку
 			if(alertString.contains(maxRegistration)) pages.registrationPage.clickRegistrationPageCloseButton();
+			// а если успешна€ регистраци€, котора€ доступна раз в сутки, то... пока не пон€тно, что делать
+			//if(alertString.contains(checkMail)) pages.registrationPage.clickRegistrationPageCloseButton();
 		}
 		
 		return alertIs;
 	}
 
 	@Override
-	public void takeScreenShot() {
+	public void takeScreenShot(ITestResult result) {
+		
+		//result нам необходима дл€ получени€ качественного скриншотинга
 		
 		String fileSeperator = System.getProperty("file.separator");
-		
+		 
 		try {
 
-
+			System.out.println("»м€ проваленного теста:"+result.getName()
+				+"  »м€ класса:"+result.getInstanceName()); 
 			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			File targetFile = new File("C:"+fileSeperator
 					+"Screenshoots"+fileSeperator+"screenshot.jpg");

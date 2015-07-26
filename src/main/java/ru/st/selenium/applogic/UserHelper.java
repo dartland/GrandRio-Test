@@ -1,5 +1,7 @@
 package ru.st.selenium.applogic;
 
+import org.testng.ITestResult;
+
 import ru.st.selenium.model.User;
 
 public interface UserHelper {
@@ -22,6 +24,6 @@ public interface UserHelper {
 
 	boolean isRegisteredIn();
 
-	void takeScreenShot();
+	void takeScreenShot(ITestResult result);
 
 }

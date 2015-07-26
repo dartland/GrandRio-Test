@@ -2,6 +2,7 @@ package ru.st.selenium;
 
 import static org.junit.Assert.assertTrue;
 
+
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -22,37 +23,51 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	
 	}
 
-//	@AfterTest
-//	public void screenShot() {
-//				       		
-//		app.getUserHelper().takeScreenShot();
-//				
+	@AfterTest
+	public void checkStatusTest() {
+		// не работает с параметром checkStatusTest(ITestResult result)
+		// то есть, если тест упал когда не нашли элемент, а не при проверке assert, то хрен знает как скриншот сделать 
+		System.out.println(">>> Error "  + " <<<<");
+		
+	}	
+	
+//	@AfterTest(alwaysRun = true)
+//	public void checkStatusTest(ITestResult result) {
+//		if (result.isSuccess()) {
+//			return;
+//		} else {
+//			// test failed!!! do whatever you want
+//			app.getUserHelper().takeScreenShot(result);
+//			
+//		}
+//		System.out.println(">>> Error " + result.getName() + " <<<<");
 //	}
 	
 	@AfterMethod
-	public void checkStatus(ITestResult result) {
+	public void checkStatusMethod(ITestResult result) {
 		if (result.isSuccess()) {
 			return;
 		} else {
 			// test failed!!! do whatever you want
-			app.getUserHelper().takeScreenShot();
+			app.getUserHelper().takeScreenShot(result);
 			
 		}
 	}
 	
-//	@Test
-//	public void AddNewUserOK() throws Exception {
-//		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
-//		app.getNavigationHelper().gotoRegistationPage();
-//		app.getUserHelper().addNewUserAs(user);
-//		assertTrue(app.getUserHelper().isRegisteredIn());
-//		
-//		//Пожалуйста, проверьте почту и завершите процесс регистрации
-//		//Достигнут максимум регистраций с адреса 109.229.68.160.
-//
-//	}
+	
+	@Test(priority = 2)
+	public void AddNewUserOK() throws Exception {
+		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
+		app.getNavigationHelper().gotoRegistationPage();
+		app.getUserHelper().addNewUserAs(user);
+		assertTrue(app.getUserHelper().isRegisteredIn());
+		
+		//Пожалуйста, проверьте почту и завершите процесс регистрации
+		//Достигнут максимум регистраций с адреса 109.229.68.160.
 
-	@Test
+	}
+
+	@Test(priority = 1, enabled = false) // приоритет исполнения первый, тест будет проигнорирован
 	public void AddNewUserFailed() throws Exception {
 
 		//app.getNavigationHelper().hideBannerLink();
@@ -60,7 +75,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
-		assertTrue(false);
+		//assertTrue(false);
 		assertTrue(app.getUserHelper().isNotRegisteredIn());
 
 	}

@@ -14,7 +14,7 @@ public class LoginTestRio extends ru.st.selenium.pages.TestBase {
 		if (app.getUserHelper().isNotLoggedInInception()) {
 			return;
 		}
-		app.getUserHelper().logout();
+		app.getUserHelper().logout(); 
 	}
 
 	@Test
