@@ -1,13 +1,15 @@
 package ru.st.selenium;
 
 import static org.junit.Assert.assertTrue;
-
+import static org.testng.Assert.fail;
 
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 import ru.st.selenium.model.User;
 
@@ -27,21 +29,9 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	public void checkStatusTest() {
 		// не работает с параметром checkStatusTest(ITestResult result)
 		// то есть, если тест упал когда не нашли элемент, а не при проверке assert, то хрен знает как скриншот сделать 
-		System.out.println(">>> Error "  + " <<<<");
+		//System.out.println(">>> Error "  + " <<<<");
 		
 	}	
-	
-//	@AfterTest(alwaysRun = true)
-//	public void checkStatusTest(ITestResult result) {
-//		if (result.isSuccess()) {
-//			return;
-//		} else {
-//			// test failed!!! do whatever you want
-//			app.getUserHelper().takeScreenShot(result);
-//			
-//		}
-//		System.out.println(">>> Error " + result.getName() + " <<<<");
-//	}
 	
 	@AfterMethod
 	public void checkStatusMethod(ITestResult result) {
@@ -55,7 +45,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	}
 	
 	
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void AddNewUserOK() throws Exception {
 		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
@@ -67,7 +57,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 
 	}
 
-	@Test(priority = 1, enabled = false) // приоритет исполнения первый, тест будет проигнорирован
+	@Test(priority = 2, enabled = true) // приоритет исполнения первый, тест будет проигнорирован
 	public void AddNewUserFailed() throws Exception {
 
 		//app.getNavigationHelper().hideBannerLink();
@@ -76,9 +66,23 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
 		//assertTrue(false);
-		assertTrue(app.getUserHelper().isNotRegisteredIn());
+		assertTrue(app.getUserHelper().isNotRegisteredIn()); 
+		
+	}	
+    
+	@Test
+    public void simpleTest() throws Exception {
+	       assertThat(2, is(2));
+	}	
 
-	}
+    @Test
+    public void failedTest() {
+        fail("This test should be failed");
+    }
+
+    @Test(dependsOnMethods = "failedTest")
+    public void skippedByDependencyTest() {
+    }	
 	
 	
 

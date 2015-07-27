@@ -1,10 +1,14 @@
 package ru.st.selenium.pages;
 
+import static org.junit.Assert.assertTrue;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.st.selenium.applogic.ApplicationManager;
 import ru.st.selenium.applogic2.ApplicationManager2;
+import ru.st.selenium.model.User;
 
 public class TestBase {
 
@@ -22,5 +26,5 @@ public class TestBase {
 		app.stop(); 
 		
 	}
-
+	
 }

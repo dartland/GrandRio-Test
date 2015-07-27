@@ -6,10 +6,11 @@
 		<listener class-name="ru.st.selenium.listeners.TestListener"/>
 	</listeners>
 
-	<test name="Test1">
-		<parameter name="path" value="/"/>
+	<test name="TestGrandRioCasino">
+		<!-- <parameter name="path" value="/"/> -->
+		<parameter name="path" value="https://test.grandrio.com"/>
 		<classes>
-		<!--      <class name="ru.st.selenium.LoginTestRio"/> -->
+		    <!-- <class name="ru.st.selenium.LoginTestRio"/>  -->
             <class name="ru.st.selenium.AddNewUser"/>
 		</classes>
 	</test>  
