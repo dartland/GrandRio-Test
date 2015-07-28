@@ -43,7 +43,8 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		} else {
 			// test failed!!! do whatever you want
 			//app.getUserHelper().takeScreenShot(result);
-			createAttachment("провален тест, смотрим скриншот"); 	makeScreenshot();
+			createAttachment("Имя проваленного теста:"+result.getName()); 	makeScreenshot();
+			//тест фэйлим, а обработка срабатывает после применения метода, то есть после след теста.
 		}
 	}
 	
@@ -85,17 +86,18 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		createAttachment("Что вышло в конце теста"); makeScreenshot();
 	}	
     
-	@Test
+	@Test(priority = 3)
     public void simpleTest() throws Exception {
 	       assertThat(2, is(2));
 	}	
 
-    @Test
+    @Test(priority = 4)
     public void failedTest() {
+    	assertTrue(false);
         fail("This test should be failed");
     }
 
-    @Test(dependsOnMethods = "failedTest")
+    @Test(priority = 5, dependsOnMethods = "failedTest")
     public void skippedByDependencyTest() {
     }	
 	
