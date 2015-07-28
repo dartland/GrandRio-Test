@@ -1,5 +1,6 @@
 package ru.st.selenium.applogic;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 import ru.st.selenium.model.User;
@@ -25,5 +26,7 @@ public interface UserHelper {
 	boolean isRegisteredIn();
 
 	void takeScreenShot(ITestResult result);
+
+	WebDriver getWebDriver();
 
 }

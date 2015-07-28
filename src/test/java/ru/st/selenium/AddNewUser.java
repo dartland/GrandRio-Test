@@ -1,17 +1,20 @@
 package ru.st.selenium;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 import ru.st.selenium.model.User;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class AddNewUser extends ru.st.selenium.pages.TestBase {
 
@@ -32,20 +35,20 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		//System.out.println(">>> Error "  + " <<<<");
 		
 	}	
-	
+
 	@AfterMethod
 	public void checkStatusMethod(ITestResult result) {
 		if (result.isSuccess()) {
 			return;
 		} else {
 			// test failed!!! do whatever you want
-			app.getUserHelper().takeScreenShot(result);
-			
+			//app.getUserHelper().takeScreenShot(result);
+			createAttachment("провален тест, смотрим скриншот"); 	makeScreenshot();
 		}
 	}
 	
 	
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	public void AddNewUserOK() throws Exception {
 		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
@@ -54,8 +57,18 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		
 		//Пожалуйста, проверьте почту и завершите процесс регистрации
 		//Достигнут максимум регистраций с адреса 109.229.68.160.
-
+		
 	}
+	
+    @Attachment("Приложение к этому тесту!")
+    public String createAttachment(String attacheString) {
+        return attacheString;
+    }
+	
+    @Attachment
+    public byte[] makeScreenshot() {
+        return ((TakesScreenshot) app.getUserHelper().getWebDriver()).getScreenshotAs(OutputType.BYTES);
+    }
 
 	@Test(priority = 2, enabled = true) // приоритет исполнения первый, тест будет проигнорирован
 	public void AddNewUserFailed() throws Exception {
@@ -65,9 +78,11 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
+		//заделаем аттач из скриншота
+		createAttachment("Заполнили поля рег. формы"); 	makeScreenshot();
 		//assertTrue(false);
 		assertTrue(app.getUserHelper().isNotRegisteredIn()); 
-		
+		createAttachment("Что вышло в конце теста"); makeScreenshot();
 	}	
     
 	@Test

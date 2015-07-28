@@ -6,6 +6,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 import ru.st.selenium.applogic.UserHelper;
@@ -144,7 +145,10 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		}
 		
 	}
-	
-	
+	@Override
+	//моя фунция, которая возвращает текущий драйвер
+	public WebDriver getWebDriver() {
+		return driver;
+	}
 
 }
