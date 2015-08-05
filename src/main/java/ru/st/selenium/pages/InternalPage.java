@@ -46,4 +46,9 @@ public class InternalPage extends AnyPage {
 
 	}
 
+	public MicrogamingPage clickMicrogamingLink() {
+		microgamingLink.click();
+		return pages.microgamingPage;
+	}
+
 }

@@ -39,4 +39,10 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 		
 	}
 
+	@Override
+	public void gotoMicrogamingPage() {
+		pages.externalPage.ensurePageLoaded().clickMicrogamingLink();
+		
+	}
+
 }

@@ -11,6 +11,7 @@ public class PageManager {
 	public LoginPage loginPage;
     public InternalPage internalPage;
 	public ExternalPage externalPage;
+	public MicrogamingPage microgamingPage;
 	public UserProfilePage userProfilePage;
 	public RegistrationPage registrationPage;
 
@@ -21,6 +22,7 @@ public class PageManager {
 		loginPage = initElements(new LoginPage(this));
 		internalPage = initElements(new InternalPage(this));
 		externalPage = initElements(new ExternalPage(this));
+		microgamingPage = initElements(new MicrogamingPage(this));
 		userProfilePage = initElements(new UserProfilePage(this));
 		registrationPage = initElements(new RegistrationPage(this));
 

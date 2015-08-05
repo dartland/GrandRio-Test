@@ -28,6 +28,49 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	
 	}
 
+   //********Тесты*************
+
+	@Test(priority = 1, enabled = false)
+	public void AddNewUserOK() throws Exception {
+		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
+		app.getNavigationHelper().gotoRegistationPage();
+		app.getUserHelper().addNewUserAs(user);
+		assertTrue(app.getUserHelper().isRegisteredIn());
+		//Пожалуйста, проверьте почту и завершите процесс регистрации
+		//Достигнут максимум регистраций с адреса 109.229.68.160.
+	}
+	
+	@Test(priority = 2, enabled = true) 
+	public void AddNewUserFailed() throws Exception {
+
+		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
+		app.getNavigationHelper().gotoRegistationPage();
+		app.getUserHelper().addNewUserAs(user);
+		//заделаем аттач из скриншота
+		//createAttachment("Заполнили поля рег. формы"); 	makeScreenshot();
+		//assertTrue(false);
+		assertTrue(app.getUserHelper().isNotRegisteredIn()); 
+
+	}	
+    
+	@Test(priority = 3)
+    public void simpleTest() throws Exception {
+	       assertThat(2, is(2));
+	}	
+
+    @Test(priority = 4)
+    public void failedTest() {
+    	assertTrue(false);
+        fail("This test should be failed");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "failedTest")
+    public void skippedByDependencyTest() {
+    }	
+	
+    //********Конец тестов*************
+    
+    
 	@AfterTest
 	public void checkStatusTest() {
 		// не работает с параметром checkStatusTest(ITestResult result)
@@ -46,22 +89,9 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 			createAttachment("Имя проваленного теста:"+result.getName()); 	makeScreenshot();
 			//тест фэйлим, а обработка срабатывает после применения метода, то есть после след теста.
 		}
-	}
-	
-	
-	@Test(priority = 1, enabled = false)
-	public void AddNewUserOK() throws Exception {
-		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
-		app.getNavigationHelper().gotoRegistationPage();
-		app.getUserHelper().addNewUserAs(user);
-		assertTrue(app.getUserHelper().isRegisteredIn());
-		
-		//Пожалуйста, проверьте почту и завершите процесс регистрации
-		//Достигнут максимум регистраций с адреса 109.229.68.160.
-		
-	}
-	
-    @Attachment("Приложение к этому тесту!")
+	}    
+    
+    @Attachment("Приложение тесту AddNewUser")
     public String createAttachment(String attacheString) {
         return attacheString;
     }
@@ -69,38 +99,6 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
     @Attachment
     public byte[] makeScreenshot() {
         return ((TakesScreenshot) app.getUserHelper().getWebDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-	@Test(priority = 2, enabled = true) // приоритет исполнения первый, тест будет проигнорирован
-	public void AddNewUserFailed() throws Exception {
-
-		//app.getNavigationHelper().hideBannerLink();
-		
-		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
-		app.getNavigationHelper().gotoRegistationPage();
-		app.getUserHelper().addNewUserAs(user);
-		//заделаем аттач из скриншота
-		createAttachment("Заполнили поля рег. формы"); 	makeScreenshot();
-		//assertTrue(false);
-		assertTrue(app.getUserHelper().isNotRegisteredIn()); 
-		createAttachment("Что вышло в конце теста"); makeScreenshot();
-	}	
-    
-	@Test(priority = 3)
-    public void simpleTest() throws Exception {
-	       assertThat(2, is(2));
-	}	
-
-    @Test(priority = 4)
-    public void failedTest() {
-    	assertTrue(false);
-        fail("This test should be failed");
-    }
-
-    @Test(priority = 5, dependsOnMethods = "failedTest")
-    public void skippedByDependencyTest() {
     }	
-	
-	
 
 }

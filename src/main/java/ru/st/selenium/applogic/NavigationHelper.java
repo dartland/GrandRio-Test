@@ -12,4 +12,6 @@ public interface NavigationHelper {
 
 	void hideBannerLink();
 
+	void gotoMicrogamingPage();
+
 }

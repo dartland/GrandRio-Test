@@ -36,11 +36,10 @@ public class ExternalPage extends AnyPage {
 	private WebElement liveCasinoLink;
 	
 	@FindBy(id = "menu_dimond")
-	private WebElement elementForHideBanner;	
-
+	private WebElement elementForHideBanner;
+	
 	public LoginPage clickEnterLink() {
 		enterLink.click();
-		// wait.until(alertIsPresent()).accept();
 		return pages.loginPage;
 	}
 
@@ -59,6 +58,11 @@ public class ExternalPage extends AnyPage {
             e.printStackTrace();
         }
 		
+	}
+
+	public MicrogamingPage clickMicrogamingLink() {
+		microgamingLink.click();
+		return pages.microgamingPage;
 	}	
 		
 }
