@@ -14,4 +14,6 @@ public interface NavigationHelper {
 
 	void gotoMicrogamingPage();
 
+	void gotoSlotGames();
+
 }

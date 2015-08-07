@@ -1,6 +1,7 @@
 package ru.st.selenium.applogic2;
 
 import ru.st.selenium.applogic.NavigationHelper;
+import ru.yandex.qatools.allure.annotations.Step;
 
 public class NavigationHelper2 extends DriverBasedHelper implements NavigationHelper {
 
@@ -39,9 +40,17 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 		
 	}
 
+	@Step("Переход на страницу игр Microgaming")
 	@Override
 	public void gotoMicrogamingPage() {
 		pages.externalPage.ensurePageLoaded().clickMicrogamingLink();
+		
+	}
+
+	@Step("Переход на страницу игр Microgaming в раздел слотовые игры")
+	@Override
+	public void gotoSlotGames() {
+		pages.microgamingPage.ensurePageLoaded().clickMicrogamingSlotLink();
 		
 	}
 

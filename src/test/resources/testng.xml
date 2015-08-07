@@ -11,7 +11,8 @@
 		<parameter name="path" value="https://test.grandrio.com"/>
 		<classes>
 		    <!-- <class name="ru.st.selenium.LoginTestRio"/>  -->
-            <class name="ru.st.selenium.AddNewUser"/>
+            <!-- <class name="ru.st.selenium.AddNewUser"/>  -->
+            <class name="ru.st.selenium.MicrogamingTest"/>
 		</classes>
 	</test>  
 </suite>

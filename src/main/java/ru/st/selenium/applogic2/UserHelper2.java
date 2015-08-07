@@ -125,30 +125,36 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public void takeScreenShot(ITestResult result) {
 		
-		//result нам необходима для получения качественного скриншотинга
-		
+		//result нам необходима для формирования имени файла скриншота из методов этого класса
 		String fileSeperator = System.getProperty("file.separator");
-		 
 		try {
-
 			System.out.println("Имя проваленного теста:"+result.getName()
 				+"  Имя класса:"+result.getInstanceName()); 
 			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			File targetFile = new File("C:"+fileSeperator
 					+"Screenshoots"+fileSeperator+"screenshot.jpg");
 			FileUtils.copyFile(screenshotFile, targetFile);
-
-			
 		} catch (Exception e) {
 			System.out.println("====>>> An exception occured while taking screenshot " + e.getCause());
-			
 		}
-		
 	}
+	
 	@Override
 	//моя фунция, которая возвращает текущий драйвер
 	public WebDriver getWebDriver() {
 		return driver;
+	}
+
+	@Override
+	public boolean isSlotGamesPresent() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public Object[][] getListMicrogamingSlotGame() {
+        Object[][] gameArray= pages.microgamingPage.getListMicrogamingSlotGame();
+        return(gameArray);
 	}
 
 }

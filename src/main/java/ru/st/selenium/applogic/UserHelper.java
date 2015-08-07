@@ -29,4 +29,8 @@ public interface UserHelper {
 
 	WebDriver getWebDriver();
 
+	boolean isSlotGamesPresent();
+
+	Object[][] getListMicrogamingSlotGame();
+
 }
