@@ -5,9 +5,12 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MicrogamingPage extends InternalPage  { //тут должно быть расширение другого класса
 
@@ -17,12 +20,12 @@ public class MicrogamingPage extends InternalPage  { //тут должно быть расширени
 
 	public MicrogamingPage ensurePageLoaded() {
 		super.ensurePageLoaded();
-		wait.until(presenceOfElementLocated(By.xpath("//a[@onclick='RIO.getGames(this, 997);'])[1]")));
+		wait.until(presenceOfElementLocated(By.xpath("(//a[@onclick='RIO.getGames(this, 997);'])[1]")));
 		//wait.until(presenceOfElementLocated(By.id("???")));
 		return this;
 	}
 	
-	@FindBy(xpath = "//a[@onclick='RIO.getGames(this, 997);'])[2]")
+	@FindBy(xpath = "(//a[@onclick='RIO.getGames(this, 997);'])[2]")
 	private WebElement microgamingSlotLink;
 	
 	@FindBys({@FindBy(className = "game_cell")})
@@ -36,15 +39,27 @@ public class MicrogamingPage extends InternalPage  { //тут должно быть расширени
 
 	public Object[][] getListMicrogamingSlotGame() {
 		String id=""; int gameCounter = 0;
-		String[][] gameArray = new String[microgamingSlotList.size()][];
-		for (WebElement microgamingSlotCell : microgamingSlotList) {
+		//Object[][] gameArray = new String[microgamingSlotList.size()][1];
+		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
+		Object[][] gameArray = new String[GamesSlot.size()-1][1]; //-1 потому, что среди game_cell одна €чейка пуста€
+		for (WebElement microgamingSlotCell : GamesSlot) {
 	    	id= String.format("%s",microgamingSlotCell.getAttribute("id")); 
 	    	if(!id.equals("")){
-	        //System.out.println("«начение 'id="+id+"'");
-	    	gameArray[gameCounter][0] = id;
-	    	gameCounter++;
+	    		gameArray[gameCounter][0] = id;
+	    		gameCounter++;
 	    	}
 	    }
 		return gameArray;
+	}
+
+	public int getSizeOfMicrogamingSlotGameList() {
+		
+		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
+//      wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("game_cell"))); 
+//		System.out.println("+++++>"+microgamingSlotList.size());
+		if (microgamingSlotList.size()>0)
+			return microgamingSlotList.size();
+		else
+			return GamesSlot.size();
 	}	
 }

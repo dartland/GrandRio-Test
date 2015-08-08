@@ -23,20 +23,21 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 		User user = new User().setLogin("dartland@rambler.ru").setPassword("123456");
 		app.getNavigationHelper().gotoLoginPage();
 		app.getUserHelper().loginAs(user);
-		assertTrue(app.getUserHelper().isLoggedInAs(user));
+		//assertTrue(app.getUserHelper().isLoggedInAs(user));
 		app.getNavigationHelper().gotoMicrogamingPage();
 		app.getNavigationHelper().gotoSlotGames();
-		assertTrue(app.getUserHelper().isSlotGamesPresent());
+		assertTrue(app.getUserHelper().isMicrogamingSlotGamesPresent());
 	}	
 	
-	@DataProvider(name = "MicrogamingSlotGame")
-    public Object[][] ListMicrogamingSlotGame() {
-        Object[][] gameArray= app.getUserHelper().getListMicrogamingSlotGame();
-        return(gameArray);
+	@DataProvider      //(name = "MicrogamingSlotGame")
+    public Object[][] MicrogamingSlotGame() {
+        Object[][] gameArray = app.getUserHelper().getListMicrogamingSlotGame();
+        return gameArray;
     }
 	
-	@Test (dataProvider = "MicrogamingSlotGame")
-	 public void gameTest(String Game){
+	@Test(dataProvider = "MicrogamingSlotGame", priority = 2, enabled = true)
+	 public void gameTest(String game){
+		System.out.println("id = '"+game+"'");
 		assertTrue(true);
 	}
 	

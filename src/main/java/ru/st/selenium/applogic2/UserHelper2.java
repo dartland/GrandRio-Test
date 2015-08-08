@@ -146,9 +146,11 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	}
 
 	@Override
-	public boolean isSlotGamesPresent() {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isMicrogamingSlotGamesPresent() {
+		if (pages.microgamingPage.getSizeOfMicrogamingSlotGameList()>0)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
