@@ -36,7 +36,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
     }
 	
 	@Test(dataProvider = "MicrogamingSlotGame", priority = 2, enabled = true)
-	 public void gameTest(String game){
+	 public void microgamingSlotGameTest(String game){
 		System.out.println("id = '"+game+"'");
 		assertTrue(true);
 	}
