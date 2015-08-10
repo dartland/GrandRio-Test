@@ -1,4 +1,4 @@
-package ru.st.selenium.model;
+package ru.st.selenium.model; 
 
 public class User {
 

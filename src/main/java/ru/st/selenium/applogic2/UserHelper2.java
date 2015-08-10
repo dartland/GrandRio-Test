@@ -1,7 +1,7 @@
 package ru.st.selenium.applogic2;
 
 
-import java.io.File;
+import java.io.File; 
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -33,7 +33,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		//на этом этапе появляется возможность появления информационного окна
 		//поэтому нужно проверить его существовние (видимость)
 		if(pages.registrationPage.isAlertPresent()) {closeAlertPage();}
-		pages.registrationPage.ensurePageLoaded()//;
+		pages.registrationPage.ensurePageLoaded()
 		.setEmailField(user.getEmail())
 		.setPasswordField(user.getPassword())
 		.setCurrencyRUBRadio()
@@ -158,5 +158,12 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
         Object[][] gameArray= pages.microgamingPage.getListMicrogamingSlotGame();
         return(gameArray);
 	}
+
+	@Override
+	public boolean isMicrogamingGameRun(String game) {
+		return pages.microgamingPage.checkMicrogamingGame(game);
+	}
+
+
 
 }

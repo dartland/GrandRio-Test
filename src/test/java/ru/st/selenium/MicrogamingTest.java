@@ -1,6 +1,6 @@
 package ru.st.selenium;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue; 
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -37,8 +37,8 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 	
 	@Test(dataProvider = "MicrogamingSlotGame", priority = 2, enabled = true)
 	 public void microgamingSlotGameTest(String game){
-		System.out.println("id = '"+game+"'");
-		assertTrue(true);
+		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
+		//assertTrue(true);
 	}
 	
 	
