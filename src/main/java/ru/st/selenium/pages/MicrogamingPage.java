@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-public class MicrogamingPage extends InternalPage  { //тут должно быть расширение другого класса
+public class MicrogamingPage extends InternalPage  { 
 
 	public MicrogamingPage(PageManager pages) {
 		super(pages);
@@ -76,7 +76,7 @@ public class MicrogamingPage extends InternalPage  { //тут должно быть расширени
 	}
 	
 	public boolean checkMicrogamingGame(String game) {
-		//System.out.println("id = '"+game+"'");
+		System.out.println("id == '"+game+"'");
 		moveDraggerToGame(game, 1, 1);
 		return true;
 	}	
