@@ -5,7 +5,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +18,7 @@ public class MicrogamingPage extends InternalPage  {
 		super(pages);
 	}
 
+	@Override
 	public MicrogamingPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.xpath("(//a[@onclick='RIO.getGames(this, 997);'])[1]")));
@@ -50,6 +50,8 @@ public class MicrogamingPage extends InternalPage  {
 	    	if(!id.equals("")){
 	    		gameArray[gameCounter][0] = id;
 	    		gameCounter++;
+	    		// тестируем первые 12 игр
+	    		//if(gameCounter>12) {break;}
 	    	}
 	    }
 		return gameArray;
@@ -61,63 +63,123 @@ public class MicrogamingPage extends InternalPage  {
 	}
 
 	@Step("Перемещаем полосу прокрутки к игре")
-	public void moveDraggerToGame(String game_id, int Dragger1, int Dragger2 ) {
+	public boolean moveDraggerToGame(String game_id, int Dragger1, int Dragger2 ) {
         //Dragger1 смещение при скроллинге
 		//Dragger2 смещение после скроллинга до полной видимости
 		Actions builder = new Actions(driver);
 		builder.build();
 		Boolean flag=false;
 		String byXPathName = ".//*[@id='"+game_id+"']/b";
-		while (!driver.findElement(By.xpath(byXPathName)).isDisplayed())
-		{
+		while (!driver.findElement(By.xpath(byXPathName)).isDisplayed()) {
 		    builder.dragAndDropBy(graggerBar,0,Dragger1).perform();//понемногу двигаем полосу прокрутки
 			flag=true;
 		};
 		if(flag) {
 			builder.dragAndDropBy(graggerBar,0,Dragger2).perform();// продвинем немного ещё, чтобы сработал метод подсветки кнопок
 		}
-		builder.dragAndDropBy(graggerBar,1,0).perform(); 
+		builder.dragAndDropBy(graggerBar,1,0).perform();
+		
+		String buttonDemoStatus =  moveCursorAndClickDemoButton(game_id, builder);
+		if (buttonDemoStatus.equals("Button_isn't_Present")) {return false;} //если кнопки нет, то сразу проваливаем тест 
+		if (buttonDemoStatus.equals("Button_is_Displayed"))  {return true;}
+		//проблема в том, что кнопка может не становиться видимой, поэтому будем дергать конечное количество раз
+
+		//while (buttonDemoStatus.equals("Button_isn't_Displayed")) {
+			builder.dragAndDropBy(graggerBar,1,0).perform();
+			buttonDemoStatus =  moveCursorAndClickDemoButton(game_id, builder);
+		//}
+		if (buttonDemoStatus.equals("Button_is_Displayed"))  {return true;}
+		else {return false;}
+		//дергаем драггер В СТОРОНУ до тех пор, пока кнопка демо не станет доступной для клика
+		
 	}
 	
-	public void moveCursorAndClickDemoButton(String game_id) {
+	public String moveCursorAndClickDemoButton(String game_id, Actions builder) {
 		String byXPathName = ".//*[@id='"+game_id+"']/b";
 		String byXPathButtonDemo = ".//*[@id='"+game_id+"']/div[2]/a[2]";
-		new Actions(driver).moveToElement(    //подводим указатель мыши к названию игры, должны появиться кнопки, нажимаем демо
-	            driver.findElement(By
-	            		.xpath(byXPathName)))
-	                    .perform(); 
+		builder.moveToElement(    //подводим указатель мыши к названию игры, должны появиться кнопки, нажимаем демо
+	            driver.findElement(By.xpath(byXPathName))).perform(); 
 		
 		if  (isElementPresent(By.xpath(byXPathButtonDemo))){
 			WebElement buttonDemo = driver.findElement(By.xpath(byXPathButtonDemo));
-			new Actions(driver).moveToElement(buttonDemo).perform();
-			buttonDemo.click();
-			
-		}	else {System.out.println("Кнопка Demo отсутствует");}
+			if(buttonDemo.isDisplayed()) {
+				builder.moveToElement(buttonDemo).perform();
+				buttonDemo.click();
+				return "Button_is_Displayed";
+			}	
+				else {	
+					System.out.println("недоступна для кликанья кнопка Демо");
+					return "Button_isn't_Displayed";
+			}
+			//не забыть что тут всплывает ебучее окно с помощником
+		}	
+		System.out.println("отсутствует кнопка Демо");
+		makeScreenshot();
+		return "Button_isn't_Present";
 	}
 	
-	public void switchToGameFrame() {
+	public boolean isSwitchToGameFrame() { //throws Exception {
+		
+		System.out.println("заходим во фрэйм с игрой, чтобы были доступны кнопки");
+		
+		try {
+	    	driver.switchTo().frame("play_box"); // заходим во фрэйм с игрой, чтобы были доступны кнопки
+		} 	catch (Exception e) {
+			makeScreenshot();
+			System.out.println("где фрэйм бля?");
+			return false;
+		}
+		
+		//переключаемся на фрэйм @class,'egamings_game_frame в котором лежит наша флэш
+		if(isElementPresent(By.xpath("//iframe[contains(@class,'egamings_game_frame')]"))) {
+			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@class,'egamings_game_frame')]"))); 	
+		} else { 
+			System.out.println("Не найден iframe[contains(@class,'egamings_game_frame')]");
+			return false;
+		}
+		// если фрейм с игрой открылся, то ищем флэш и тестируем ее на 100% загрузку 
+		if(isElementPresent(By.xpath(".//*[@id='system']"))) {
+			//System.out.println("Мы вошли во фрэйм с игрой");	
+			//FlashObjectWebDriver flashApp = new FlashObjectWebDriver(driver, "system");
+			//System.out.println("Игра загружена на:"+flashApp.callFlashObject("PercentLoaded")+"%, управление передано плагину");
+		} else { 
+			System.out.println("Не найден флэш с id=system");
+			return false;
+			   }
+		// выходим из фрэйма в корень, нам нужно нажать кнопку close, а она недоступна из фрэма с игрой
+		driver.switchTo().defaultContent();
+		if(isElementPresent(By.xpath("//*[@id='play_box']"))) {
+			driver.switchTo().frame("play_box");
+			//Thread.sleep(100L); работает если throws Exception
+			new Actions(driver).moveToElement(
+		            driver.findElement(By
+		            		.xpath(".//*[@id='game_close']")))
+		            .perform();
+			
+			driver.findElement(By.xpath(".//*[@id='game_close']")).click(); 
+			driver.switchTo().defaultContent();
+			System.out.println("все прошло нормально");
+			return true;
+			
+		} else { 
+			System.out.println("НЕ найден iframe  id=play_box");
+			return false;
+		}  	
 		
 	}
 		
 	
 	public boolean checkMicrogamingGame(String game) {
 		System.out.println("id == '"+game+"'");
-		moveDraggerToGame(game, 1, 1);
-		moveCursorAndClickDemoButton(game);
-		switchToGameFrame();
-		return true;
+		if(moveDraggerToGame(game, 1, 1))
+			{return isSwitchToGameFrame();}
+		else
+			{return false;}
 	}	
 	
-	private boolean isElementPresent(By by) {
-	    try {
-		     driver.findElement(by);
-		     return true;
-		    } catch (NoSuchElementException e) {
-		     return false;
-		    }
-	}
 		
 }
+
 
 
 

@@ -44,6 +44,7 @@ public class LoginPage extends AnyPage {
 		submitButton.click();
 	}
 
+	@Override
 	public LoginPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("frgt_psw"))); // Забыли

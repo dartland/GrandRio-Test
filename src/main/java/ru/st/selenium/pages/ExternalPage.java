@@ -13,6 +13,7 @@ public class ExternalPage extends AnyPage {
 		super(pages);
 	}
 
+	@Override
 	public ExternalPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("language")));

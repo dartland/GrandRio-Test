@@ -103,7 +103,7 @@ public class WebDriverFactory {
 			capability = DesiredCapabilities.htmlUnit();
 			// HTMLunit Check
 			if (username != null && password != null) {
-				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver.create(username, password);
+				webDriver = AuthenticatedHtmlUnitDriver.create(username, password);
 			} else {
 				webDriver = new HtmlUnitDriver(true);
 			}
@@ -169,7 +169,7 @@ public class WebDriverFactory {
 
 			// HTMLunit Check
 			if (username != null && password != null) {
-				webDriver = (HtmlUnitDriver) AuthenticatedHtmlUnitDriver.create(username, password);
+				webDriver = AuthenticatedHtmlUnitDriver.create(username, password);
 			} else {
 				webDriver = new HtmlUnitDriver(true);
 			}

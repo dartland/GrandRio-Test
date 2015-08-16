@@ -1,6 +1,6 @@
 package ru.st.selenium.applogic2;
 
-import ru.st.selenium.applogic.NavigationHelper;  
+import ru.st.selenium.applogic.NavigationHelper;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class NavigationHelper2 extends DriverBasedHelper implements NavigationHelper {

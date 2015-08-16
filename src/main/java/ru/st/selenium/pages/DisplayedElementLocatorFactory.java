@@ -15,6 +15,7 @@ public class DisplayedElementLocatorFactory implements ElementLocatorFactory {
 		this.timeOutInSeconds = timeOutInSeconds;
 	}
 
+	@Override
 	public ElementLocator createLocator(Field field) {
 		return new DisplayedElementLocator(driver, field, timeOutInSeconds);
 	}

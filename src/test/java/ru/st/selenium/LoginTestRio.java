@@ -1,6 +1,6 @@
 package ru.st.selenium;
 
-import static org.junit.Assert.assertTrue; 
+import static org.junit.Assert.assertTrue;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

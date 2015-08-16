@@ -12,6 +12,7 @@ public class InternalPage extends AnyPage {
 		super(pages);
 	}
 
+	@Override
 	public InternalPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("language")));

@@ -1,6 +1,6 @@
 package ru.st.selenium.applogic2;
 
-import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ru.st.selenium.pages.PageManager;

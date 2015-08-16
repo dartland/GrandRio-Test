@@ -95,6 +95,7 @@ public class RegistrationPage extends AnyPage {
 		return this;
 	}
 
+	@Override
 	public RegistrationPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.xpath(".//*[@id='reg_form']/h4"))); // надпись "регистрация"

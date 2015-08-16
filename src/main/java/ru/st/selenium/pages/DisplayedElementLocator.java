@@ -11,6 +11,7 @@ public class DisplayedElementLocator extends AjaxElementLocator {
 		super(driver, field, timeOutInSeconds);
 	}
 
+	@Override
 	protected boolean isElementUsable(WebElement element) {
 		return element.isDisplayed();
 	}

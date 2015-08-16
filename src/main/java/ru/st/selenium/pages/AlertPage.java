@@ -27,6 +27,7 @@ public class AlertPage extends AnyPage {
 
 
 
+	@Override
 	public AlertPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("alert-message-holder"))); // Забыли пароль?

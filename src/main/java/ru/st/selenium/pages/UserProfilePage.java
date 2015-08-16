@@ -55,6 +55,7 @@ public class UserProfilePage extends InternalPage {
 	// return permissionDropdown().getFirstSelectedOption().getText();
 	// }
 
+	@Override
 	public UserProfilePage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("save_data"))); // кнопка

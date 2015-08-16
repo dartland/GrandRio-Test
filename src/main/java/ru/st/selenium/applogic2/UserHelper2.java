@@ -1,7 +1,7 @@
 package ru.st.selenium.applogic2;
 
 
-import java.io.File; 
+import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
