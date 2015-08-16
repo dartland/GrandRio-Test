@@ -63,7 +63,7 @@ public class MicrogamingPage extends InternalPage  {
 	}
 
 	@Step("Перемещаем полосу прокрутки к игре")
-	public boolean moveDraggerToGame(String game_id, int Dragger1, int Dragger2 ) {
+	public boolean moveDraggerToGameAndCkickDemoButton(String game_id, int Dragger1, int Dragger2 ) {
         //Dragger1 смещение при скроллинге
 		//Dragger2 смещение после скроллинга до полной видимости
 		Actions builder = new Actions(driver);
@@ -79,22 +79,14 @@ public class MicrogamingPage extends InternalPage  {
 		}
 		builder.dragAndDropBy(graggerBar,1,0).perform();
 		
-		String buttonDemoStatus =  moveCursorAndClickDemoButton(game_id, builder);
-		if (buttonDemoStatus.equals("Button_isn't_Present")) {return false;} //если кнопки нет, то сразу проваливаем тест 
-		if (buttonDemoStatus.equals("Button_is_Displayed"))  {return true;}
-		//проблема в том, что кнопка может не становиться видимой, поэтому будем дергать конечное количество раз
+		driver.findElement(By.xpath(byXPathName)).click(); //позиционируем кликом фокус браузера на элемент с игрой
+		
+		return  moveCursorAndClickDemoButton(game_id, builder);
 
-		//while (buttonDemoStatus.equals("Button_isn't_Displayed")) {
-			builder.dragAndDropBy(graggerBar,1,0).perform();
-			buttonDemoStatus =  moveCursorAndClickDemoButton(game_id, builder);
-		//}
-		if (buttonDemoStatus.equals("Button_is_Displayed"))  {return true;}
-		else {return false;}
-		//дергаем драггер В СТОРОНУ до тех пор, пока кнопка демо не станет доступной для клика
 		
 	}
 	
-	public String moveCursorAndClickDemoButton(String game_id, Actions builder) {
+	public boolean moveCursorAndClickDemoButton(String game_id, Actions builder) {
 		String byXPathName = ".//*[@id='"+game_id+"']/b";
 		String byXPathButtonDemo = ".//*[@id='"+game_id+"']/div[2]/a[2]";
 		builder.moveToElement(    //подводим указатель мыши к названию игры, должны появиться кнопки, нажимаем демо
@@ -105,17 +97,17 @@ public class MicrogamingPage extends InternalPage  {
 			if(buttonDemo.isDisplayed()) {
 				builder.moveToElement(buttonDemo).perform();
 				buttonDemo.click();
-				return "Button_is_Displayed";
+				return true; //"Button_is_Displayed";
 			}	
 				else {	
 					System.out.println("недоступна для кликанья кнопка Демо");
-					return "Button_isn't_Displayed";
+					makeScreenshot();
+					return false;//"Button_isn't_Displayed";
 			}
-			//не забыть что тут всплывает ебучее окно с помощником
+			
 		}	
 		System.out.println("отсутствует кнопка Демо");
-		makeScreenshot();
-		return "Button_isn't_Present";
+		return false;//"Button_isn't_Present";
 	}
 	
 	public boolean isSwitchToGameFrame() { //throws Exception {
@@ -151,11 +143,7 @@ public class MicrogamingPage extends InternalPage  {
 		if(isElementPresent(By.xpath("//*[@id='play_box']"))) {
 			driver.switchTo().frame("play_box");
 			//Thread.sleep(100L); работает если throws Exception
-			new Actions(driver).moveToElement(
-		            driver.findElement(By
-		            		.xpath(".//*[@id='game_close']")))
-		            .perform();
-			
+			new Actions(driver).moveToElement(driver.findElement(By.xpath(".//*[@id='game_close']"))).perform();
 			driver.findElement(By.xpath(".//*[@id='game_close']")).click(); 
 			driver.switchTo().defaultContent();
 			System.out.println("все прошло нормально");
@@ -165,13 +153,12 @@ public class MicrogamingPage extends InternalPage  {
 			System.out.println("НЕ найден iframe  id=play_box");
 			return false;
 		}  	
-		
 	}
 		
 	
 	public boolean checkMicrogamingGame(String game) {
 		System.out.println("id == '"+game+"'");
-		if(moveDraggerToGame(game, 1, 1))
+		if(moveDraggerToGameAndCkickDemoButton(game, 1, 1))
 			{return isSwitchToGameFrame();}
 		else
 			{return false;}
