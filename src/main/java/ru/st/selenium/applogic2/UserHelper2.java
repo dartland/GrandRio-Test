@@ -46,9 +46,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	public void closeAlertPage() {
 		boolean alertIs = pages.alertPage.waitPageLoaded();
 		if (alertIs) pages.alertPage.clickAlertPageCloseButton();
-	
 	}
-
 
 	@Override
 	public void logout() {
@@ -76,6 +74,9 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	}
 
 	@Override
+	//нифига не понимаю как это работает!!!!
+	//догадка такая, что мeтод waitPageLoaded() вызывается из Page (LoginPage extends Page),
+	//а он в свою очередь вызывает метод ensurePageLoaded() не из Page, а из LoginPage, который переопределен
 	public boolean isNotLoggedInInception() {
 		return pages.loginPage.waitPageLoaded();
 	}
@@ -86,9 +87,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		return new User()
 				// .setLogin(userProfile.getFirstName())
 				.setEmail(userProfile.getEmail());
-
 	}
-
 	
 	@Override
 	public boolean isNotRegisteredIn() {
@@ -98,7 +97,6 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 			if(pages.registrationPage.isAlertPresent()) {closeAlertPage();}
 			pages.registrationPage.clickRegistrationPageCloseButton();
 		}
-
 		return notRegistered;
 	}
 
@@ -147,15 +145,23 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 
 	@Override
 	public boolean isMicrogamingSlotGamesPresent() {
-		if (pages.microgamingPage.getSizeOfMicrogamingSlotGameList()>0)
+		if (pages.microgamingPage.getSizeOfMicrogamingGameList()>0)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public boolean isMicrogamingTableGamesPresent() {
+		if (pages.microgamingPage.getSizeOfMicrogamingGameList()>0)
 			return true;
 		else
 			return false;
 	}
 
 	@Override
-	public Object[][] getListMicrogamingSlotGame() {
-        Object[][] gameArray= pages.microgamingPage.getListMicrogamingSlotGame();
+	public Object[][] getListMicrogamingGame() {
+        Object[][] gameArray= pages.microgamingPage.getListMicrogamingGame();
         return(gameArray);
 	}
 

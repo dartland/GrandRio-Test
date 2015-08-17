@@ -16,4 +16,6 @@ public interface NavigationHelper {
 
 	void gotoSlotGames();
 
+	void gotoTableGames();
+
 }

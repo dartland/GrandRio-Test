@@ -54,4 +54,10 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 		
 	}
 
+	@Step("ѕереход на страницу игр Microgaming в раздел настольные игры")
+	@Override
+	public void gotoTableGames() {
+		pages.microgamingPage.ensurePageLoaded().clickMicrogamingTableLink();
+	}
+
 }

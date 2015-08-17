@@ -29,6 +29,9 @@ public class MicrogamingPage extends InternalPage  {
 	@FindBy(xpath = "(//a[@onclick='RIO.getGames(this, 997);'])[2]")
 	private WebElement microgamingSlotLink;
 	
+	@FindBy(xpath = "(//a[@onclick='RIO.getGames(this, 997);'])[3]")
+	private WebElement microgamingTableLink;
+	
 	@FindBys({@FindBy(className = "game_cell")})
 	private List<WebElement> microgamingSlotList;
 	
@@ -39,10 +42,14 @@ public class MicrogamingPage extends InternalPage  {
 		microgamingSlotLink.click();
 		return pages.microgamingPage;
 	}
+	
+	public MicrogamingPage clickMicrogamingTableLink() {
+		microgamingTableLink.click();
+		return pages.microgamingPage;
+	}	
 
-	public Object[][] getListMicrogamingSlotGame() {
-		String id=""; int gameCounter = 0;
-		//Object[][] gameArray = new String[microgamingSlotList.size()][1];
+	public Object[][] getListMicrogamingGame() {
+		String id=""; int gameCounter = 0; 
 		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
 		Object[][] gameArray = new String[GamesSlot.size()-1][1]; //-1 потому, что среди game_cell одна €чейка пуста€
 		for (WebElement microgamingSlotCell : GamesSlot) {
@@ -50,14 +57,12 @@ public class MicrogamingPage extends InternalPage  {
 	    	if(!id.equals("")){
 	    		gameArray[gameCounter][0] = id;
 	    		gameCounter++;
-	    		// тестируем первые 12 игр
-	    		//if(gameCounter>12) {break;}
 	    	}
 	    }
 		return gameArray;
 	}
 
-	public int getSizeOfMicrogamingSlotGameList() {
+	public int getSizeOfMicrogamingGameList() {
 		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
 		return GamesSlot.size();
 	}
@@ -162,9 +167,9 @@ public class MicrogamingPage extends InternalPage  {
 			{return isSwitchToGameFrame();}
 		else
 			{return false;}
-	}	
+	}
+
 	
-		
 }
 
 

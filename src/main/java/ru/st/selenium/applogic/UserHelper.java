@@ -29,10 +29,12 @@ public interface UserHelper {
 
 	WebDriver getWebDriver();
 
-	Object[][] getListMicrogamingSlotGame();
-
 	boolean isMicrogamingSlotGamesPresent();
 
 	boolean isMicrogamingGameRun(String game);
+
+	Object[][] getListMicrogamingGame();
+
+	boolean isMicrogamingTableGamesPresent();
 
 }

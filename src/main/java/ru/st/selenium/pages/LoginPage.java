@@ -47,8 +47,7 @@ public class LoginPage extends AnyPage {
 	@Override
 	public LoginPage ensurePageLoaded() {
 		super.ensurePageLoaded();
-		wait.until(presenceOfElementLocated(By.id("frgt_psw"))); // Забыли
-																	// пароль?
+		wait.until(presenceOfElementLocated(By.id("frgt_psw"))); // Забыли пароль?
 		return this;
 	}
 }
