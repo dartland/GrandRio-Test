@@ -37,4 +37,6 @@ public interface UserHelper {
 
 	boolean isMicrogamingTableGamesPresent();
 
+	boolean isNetEntSlotGamesPresent();
+
 }

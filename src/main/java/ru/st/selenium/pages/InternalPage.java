@@ -24,7 +24,7 @@ public class InternalPage extends AnyPage {
 	private WebElement microgamingLink;
 
 	@FindBy(id = "casino_3d_btn")
-	private WebElement netentLink;
+	private WebElement netEntLink;
 
 	@FindBy(id = "live_casino_btn")
 	private WebElement liveCasinoLink;
@@ -49,6 +49,11 @@ public class InternalPage extends AnyPage {
 
 	public MicrogamingPage clickMicrogamingLink() {
 		microgamingLink.click();
+		return pages.microgamingPage;
+	}
+
+	public MicrogamingPage clickNetEntLink() {
+		netEntLink.click();
 		return pages.microgamingPage;
 	}
 

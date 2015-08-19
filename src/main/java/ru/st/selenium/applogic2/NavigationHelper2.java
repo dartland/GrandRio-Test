@@ -43,21 +43,33 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
 	@Step("Переход на страницу игр Microgaming")
 	@Override
 	public void gotoMicrogamingPage() {
-		pages.externalPage.ensurePageLoaded().clickMicrogamingLink();
+		pages.internalPage.ensurePageLoaded().clickMicrogamingLink();
 		
 	}
 
 	@Step("Переход на страницу игр Microgaming в раздел слотовые игры")
 	@Override
-	public void gotoSlotGames() {
+	public void gotoMicrogamingSlotGames() {
 		pages.microgamingPage.ensurePageLoaded().clickMicrogamingSlotLink();
 		
 	}
 
 	@Step("Переход на страницу игр Microgaming в раздел настольные игры")
 	@Override
-	public void gotoTableGames() {
+	public void gotoMicrogamingTableGames() {
 		pages.microgamingPage.ensurePageLoaded().clickMicrogamingTableLink();
+	}
+
+	@Step("Переход на страницу игр NETENT")
+	@Override
+	public void gotoNetEntPage() {
+		pages.internalPage.ensurePageLoaded().clickNetEntLink();
+	}
+
+	@Step("Переход на страницу игр NETENT в раздел слотовые игры")
+	@Override
+	public void gotoNetEntSlotGames() {
+		pages.microgamingPage.ensurePageLoaded().clickNetEntSlotLink();
 	}
 
 }

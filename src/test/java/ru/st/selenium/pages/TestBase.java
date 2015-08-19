@@ -2,6 +2,7 @@ package ru.st.selenium.pages;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+
 import ru.st.selenium.applogic.ApplicationManager;
 import ru.st.selenium.applogic2.ApplicationManager2;
 

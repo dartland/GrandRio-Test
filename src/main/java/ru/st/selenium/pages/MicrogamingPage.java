@@ -32,6 +32,9 @@ public class MicrogamingPage extends InternalPage  {
 	@FindBy(xpath = "(//a[@onclick='RIO.getGames(this, 997);'])[3]")
 	private WebElement microgamingTableLink;
 	
+	@FindBy(xpath = "(//a[@onclick='RIO.getGames(this, 992);'])[2]")
+	private WebElement netEntSlotLink;	
+	
 	@FindBys({@FindBy(className = "game_cell")})
 	private List<WebElement> microgamingSlotList;
 	
@@ -40,6 +43,11 @@ public class MicrogamingPage extends InternalPage  {
 
 	public MicrogamingPage clickMicrogamingSlotLink() {
 		microgamingSlotLink.click();
+		return pages.microgamingPage;
+	}
+	
+	public MicrogamingPage clickNetEntSlotLink() {
+		netEntSlotLink.click();
 		return pages.microgamingPage;
 	}
 	
@@ -168,6 +176,8 @@ public class MicrogamingPage extends InternalPage  {
 		else
 			{return false;}
 	}
+
+
 
 	
 }

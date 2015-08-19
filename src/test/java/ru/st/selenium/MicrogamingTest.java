@@ -13,6 +13,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 	@BeforeMethod
 	public void mayBeLogout() {
 		if (app.getUserHelper().isNotLoggedInInception()) {
+			System.out.println("**********isNotLoggedInInception**********");
 			return;
 		}
 		app.getUserHelper().logout(); 
@@ -25,7 +26,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 		app.getUserHelper().loginAs(user);
 		//assertTrue(app.getUserHelper().isLoggedInAs(user));
 		app.getNavigationHelper().gotoMicrogamingPage();
-		app.getNavigationHelper().gotoSlotGames();
+		app.getNavigationHelper().gotoMicrogamingSlotGames();
 		assertTrue(app.getUserHelper().isMicrogamingSlotGamesPresent());
 	}	
 	
@@ -42,7 +43,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 	
 	@Test(priority = 3, enabled = true)
 	public void testMicrogamingTableGame() throws Exception {
-		app.getNavigationHelper().gotoTableGames();
+		app.getNavigationHelper().gotoMicrogamingTableGames();
 		assertTrue(app.getUserHelper().isMicrogamingTableGamesPresent());
 	}		
 	
