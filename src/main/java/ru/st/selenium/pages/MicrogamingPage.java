@@ -194,10 +194,7 @@ public class MicrogamingPage extends InternalPage  {
 	public boolean checkMicrogamingGame(String game) {
 		String byXPathName = ".//*[@id='"+game+"']/b";
 		System.out.println("проверяем игру id == '"+game+"'");
-		isElementPresent(By.xpath(byXPathName));
-		driver.findElements(By.className("game_cell"));
-		WebElement element =  driver.findElement(By.xpath(byXPathName));
-		//nameOfGameAttachment(driver.findElement(By.xpath(byXPathName)).getText());
+		nameOfGameAttachment(driver.findElement(By.xpath(byXPathName)).getText());
 		if(moveDraggerToGameAndCkickDemoButton(game, 1, 1))
 			return isSwitchToGameFrame();
 		else
