@@ -2,6 +2,7 @@ package ru.st.selenium;
 
 import static org.junit.Assert.assertTrue;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,8 +13,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 	
 	@BeforeMethod
 	public void mayBeLogout() {
-		if (app.getUserHelper().isNotLoggedInInception()) {
-			System.out.println("**********isNotLoggedInInception**********");
+		if (app.getUserHelper().isNotLoggedIn()) {
 			return;
 		}
 		app.getUserHelper().logout(); 
@@ -30,16 +30,16 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 		assertTrue(app.getUserHelper().isMicrogamingSlotGamesPresent());
 	}	
 	
-//	@DataProvider      //(name = "MicrogamingSlotGame")
-//    public Object[][] MicrogamingSlotGame() {
-//        Object[][] gameArray = app.getUserHelper().getListMicrogamingGame();
-//        return gameArray;
-//    }
-//	
-//	@Test(dataProvider = "MicrogamingSlotGame", priority = 2, enabled = true)
-//	 public void microgamingSlotGameTest(String game){
-//		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
-//	}
+	@DataProvider      //(name = "MicrogamingSlotGame")
+    public Object[][] MicrogamingSlotGame() {
+        Object[][] gameArray = app.getUserHelper().getListMicrogamingGame();
+        return gameArray;
+    }
+	
+	@Test(dataProvider = "MicrogamingSlotGame", priority = 2, enabled = true)
+	 public void microgamingSlotGameTest(String game){
+		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
+	}
 	
 	@Test(priority = 3, enabled = true)
 	public void testMicrogamingTableGame() throws Exception {
@@ -54,8 +54,16 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
     }
 	
 	@Test(dataProvider = "MicrogamingTableGame", priority = 4, enabled = true)
-	 public void microgamingTableGameTest(String game){
+	public void microgamingTableGameTest(String game){
 		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
+	}
+	
+	@AfterClass
+	public void logout(){
+		if (app.getUserHelper().isNotLoggedIn()) {
+			return;
+		}
+		app.getUserHelper().logout(); 
 	}
 	
 	

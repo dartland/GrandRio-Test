@@ -17,7 +17,7 @@ public interface UserHelper {
 
 	boolean isNotLoggedIn();
 
-	boolean isNotLoggedInInception();
+	boolean isLoginPageNotLoggedIn();
 
 	void addNewUserAs(User user);
 

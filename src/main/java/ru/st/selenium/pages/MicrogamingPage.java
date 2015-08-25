@@ -131,7 +131,7 @@ public class MicrogamingPage extends InternalPage  {
 	    	driver.switchTo().frame("play_box"); // заходим во фрэйм с игрой, чтобы были доступны кнопки
 		} 	catch (Exception e) {
 			makeScreenshot();
-			System.out.println("где фрэйм бля?");
+			System.out.println("где фрэйм?");
 			return false;
 		}
 		
@@ -149,7 +149,8 @@ public class MicrogamingPage extends InternalPage  {
 			//System.out.println("Игра загружена на:"+flashApp.callFlashObject("PercentLoaded")+"%, управление передано плагину");
 		} else { 
 			System.out.println("Не найден флэш с id=system");
-			return false;
+			noSuchElementExceptionAttachment("Не найден флэш с id=system"); makeScreenshot();
+			//return false; попытаться ещё раз войти в игру
 			   }
 		// выходим из фрэйма в корень, нам нужно нажать кнопку close, а она недоступна из фрэма с игрой
 		driver.switchTo().defaultContent();
@@ -171,6 +172,7 @@ public class MicrogamingPage extends InternalPage  {
 	
 	public boolean checkMicrogamingGame(String game) {
 		System.out.println("id == '"+game+"'");
+		nameOfGameAttachment(driver.findElement(By.xpath(".//*[@id='"+game+"']/b")).getText());
 		if(moveDraggerToGameAndCkickDemoButton(game, 1, 1))
 			{return isSwitchToGameFrame();}
 		else

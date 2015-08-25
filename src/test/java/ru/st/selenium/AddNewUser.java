@@ -9,7 +9,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,7 +20,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	@BeforeMethod
 	public void mayBeLogout() {
 				       		
-		if (app.getUserHelper().isNotLoggedInInception()) {
+		if (app.getUserHelper().isNotLoggedIn()) {
 			return;
 		}
 		app.getUserHelper().logout();
@@ -70,17 +69,12 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 	
     //******** онец тестов*************
     
-    
-	@AfterTest
-	public void checkStatusTest() {
-		// не работает с параметром checkStatusTest(ITestResult result)
-		// то есть, если тест упал когда не нашли элемент, а не при проверке assert, то хрен знает как скриншот сделать 
-		//System.out.println(">>> Error "  + " <<<<");
-		
-	}	
+
 
 	@AfterMethod
 	public void checkStatusMethod(ITestResult result) {
+		// 		if (ITestResult.FAILURE == result.getStatus() ) {return;}
+		
 		if (result.isSuccess()) {
 			return;
 		} else {

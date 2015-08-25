@@ -10,8 +10,7 @@ import ru.st.selenium.model.User;
 public class NetEntTest extends ru.st.selenium.pages.TestBase {
 	@BeforeMethod
 	public void mayBeLogout() {
-		if (app.getUserHelper().isNotLoggedInInception()) {
-			System.out.println("**********isNotLoggedInInception**********");
+		if (app.getUserHelper().isNotLoggedIn()) {
 			return;
 		}
 		app.getUserHelper().logout(); 

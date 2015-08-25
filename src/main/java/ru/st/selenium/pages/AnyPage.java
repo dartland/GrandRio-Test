@@ -29,6 +29,11 @@ public abstract class AnyPage extends Page {
         return attacheString;
     }
     
+    @Attachment("Тест наличия игры")
+    public String nameOfGameAttachment(String attacheString) {
+        return attacheString;
+    }
+    
     @Attachment
     public byte[] makeScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);

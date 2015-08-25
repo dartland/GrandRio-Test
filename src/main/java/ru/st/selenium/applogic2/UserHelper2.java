@@ -64,7 +64,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	}
 
 	@Override
-	public boolean isNotLoggedIn() {
+	public boolean isLoginPageNotLoggedIn() {
 		boolean notLogged = pages.loginPage.waitPageLoaded();
 		if (notLogged) {
 			pages.loginPage.clickLoginPageCloseButton();
@@ -77,8 +77,8 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	//нифига не понимаю как это работает!!!!
 	//догадка такая, что мeтод waitPageLoaded() вызывается из Page (LoginPage extends Page),
 	//а он в свою очередь вызывает метод ensurePageLoaded() не из Page, а из LoginPage, который переопределен
-	public boolean isNotLoggedInInception() {
-		return pages.loginPage.waitPageLoaded();
+	public boolean isNotLoggedIn() {
+		return pages.externalPage.waitPageLoaded();
 	}
 
 	private User getLoggedUser() {
@@ -107,7 +107,7 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 		
 		if (alertIs) {
 			String alertString = pages.alertPage.getAlertText();
-			CharSequence checkMail = "Пожалуйста, проверьте почту";
+			//CharSequence checkMail = "Пожалуйста, проверьте почту";
 			CharSequence maxRegistration = "Достигнут максимум регистраций";
 			pages.alertPage.clickAlertPageCloseButton(); //в любом случае закрываем окно алерта
 			//System.out.println(alertString);
@@ -146,6 +146,14 @@ public class UserHelper2 extends DriverBasedHelper implements UserHelper {
 	@Override
 	public boolean isMicrogamingSlotGamesPresent() {
 		if (pages.microgamingPage.getSizeOfMicrogamingGameList()>0)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public boolean isNetEntSlotGamesPresent() {
+		if (pages.microgamingPage.getSizeOfMicrogamingGameList()>0) //одна и та же функция
 			return true;
 		else
 			return false;
