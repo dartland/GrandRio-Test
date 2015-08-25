@@ -30,7 +30,7 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 		assertTrue(app.getUserHelper().isMicrogamingSlotGamesPresent());
 	}	
 	
-	@DataProvider      //(name = "MicrogamingSlotGame")
+	@DataProvider      
     public Object[][] MicrogamingSlotGame() {
         Object[][] gameArray = app.getUserHelper().getListMicrogamingGame();
         return gameArray;
@@ -40,23 +40,23 @@ public class MicrogamingTest extends ru.st.selenium.pages.TestBase {
 	 public void microgamingSlotGameTest(String game){
 		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
 	}
-	
-	@Test(priority = 3, enabled = true)
-	public void testMicrogamingTableGame() throws Exception {
-		app.getNavigationHelper().gotoMicrogamingTableGames();
-		assertTrue(app.getUserHelper().isMicrogamingTableGamesPresent());
-	}		
-	
-	@DataProvider      //(name = "MicrogamingTableGame")
-    public Object[][] MicrogamingTableGame() {
-        Object[][] gameArray = app.getUserHelper().getListMicrogamingGame();
-        return gameArray;
-    }
-	
-	@Test(dataProvider = "MicrogamingTableGame", priority = 4, enabled = true)
-	public void microgamingTableGameTest(String game){
-		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
-	}
+//	
+//	@Test(priority = 3, enabled = true)
+//	public void testMicrogamingTableGame() throws Exception {
+//		app.getNavigationHelper().gotoMicrogamingTableGames();
+//		assertTrue(app.getUserHelper().isMicrogamingTableGamesPresent());
+//	}		
+//	
+//	@DataProvider      //(name = "MicrogamingTableGame")
+//    public Object[][] MicrogamingTableGame() {
+//        Object[][] gameArray = app.getUserHelper().getListMicrogamingGame();
+//        return gameArray;
+//    }
+//	
+//	@Test(dataProvider = "MicrogamingTableGame", priority = 4, enabled = true)
+//	public void microgamingTableGameTest(String game){
+//		assertTrue(app.getUserHelper().isMicrogamingGameRun(game));
+//	}
 	
 	@AfterClass
 	public void logout(){

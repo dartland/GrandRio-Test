@@ -1,6 +1,7 @@
 package ru.st.selenium.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ public class InternalPage extends AnyPage {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.id("language")));
 		wait.until(presenceOfElementLocated(By.id("balance")));
+		wait.until(visibilityOfElementLocated(By.id("balance")));
 		return this;
 	}
 

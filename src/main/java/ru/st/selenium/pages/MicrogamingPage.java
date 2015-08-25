@@ -56,19 +56,39 @@ public class MicrogamingPage extends InternalPage  {
 		return pages.microgamingPage;
 	}	
 
+//	//это для всего количества игр
+//	public Object[][] getListMicrogamingGame() {
+//		String id=""; int gameCounter = 0; 
+//		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
+//		Object[][] gameArray = new String[GamesSlot.size()-1][1]; //-1 потому, что среди game_cell одна ячейка пустая
+//		for (WebElement microgamingSlotCell : GamesSlot) {
+//	    	id= String.format("%s",microgamingSlotCell.getAttribute("id")); 
+//	    	if(!id.equals("")){
+//	    		gameArray[gameCounter][0] = id;
+//	    		gameCounter++;
+//	    	}
+//	    }
+//		return gameArray;
+//	}
+	
+	// для теста достаточно 16-ти игр
 	public Object[][] getListMicrogamingGame() {
-		String id=""; int gameCounter = 0; 
-		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
-		Object[][] gameArray = new String[GamesSlot.size()-1][1]; //-1 потому, что среди game_cell одна ячейка пустая
-		for (WebElement microgamingSlotCell : GamesSlot) {
-	    	id= String.format("%s",microgamingSlotCell.getAttribute("id")); 
-	    	if(!id.equals("")){
-	    		gameArray[gameCounter][0] = id;
-	    		gameCounter++;
-	    	}
-	    }
-		return gameArray;
-	}
+	String id=""; int gameCounter = 0; 
+	List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
+	int numberOfGame = 0;
+	Object[][] gameArray = new String[15][1]; //-1 потому, что среди game_cell одна ячейка пустая
+	for (WebElement microgamingSlotCell : GamesSlot) {
+    	id= String.format("%s",microgamingSlotCell.getAttribute("id")); 
+    	if(!id.equals("")){
+    		gameArray[gameCounter][0] = id;
+    		gameCounter++;
+    	}
+    	numberOfGame++;
+    	if(numberOfGame==16)
+    		break;
+    }
+	return gameArray;
+}	
 
 	public int getSizeOfMicrogamingGameList() {
 		List<WebElement> GamesSlot = driver.findElements(By.className("game_cell"));
@@ -83,6 +103,7 @@ public class MicrogamingPage extends InternalPage  {
 		builder.build();
 		Boolean flag=false;
 		String byXPathName = ".//*[@id='"+game_id+"']/b";
+		System.out.println("попытка найти элемент: "+byXPathName);
 		while (!driver.findElement(By.xpath(byXPathName)).isDisplayed()) {
 		    builder.dragAndDropBy(graggerBar,0,Dragger1).perform();//понемногу двигаем полосу прокрутки
 			flag=true;
@@ -171,12 +192,16 @@ public class MicrogamingPage extends InternalPage  {
 		
 	
 	public boolean checkMicrogamingGame(String game) {
-		System.out.println("id == '"+game+"'");
-		nameOfGameAttachment(driver.findElement(By.xpath(".//*[@id='"+game+"']/b")).getText());
+		String byXPathName = ".//*[@id='"+game+"']/b";
+		System.out.println("проверяем игру id == '"+game+"'");
+		isElementPresent(By.xpath(byXPathName));
+		driver.findElements(By.className("game_cell"));
+		WebElement element =  driver.findElement(By.xpath(byXPathName));
+		//nameOfGameAttachment(driver.findElement(By.xpath(byXPathName)).getText());
 		if(moveDraggerToGameAndCkickDemoButton(game, 1, 1))
-			{return isSwitchToGameFrame();}
+			return isSwitchToGameFrame();
 		else
-			{return false;}
+			return false;
 	}
 
 
