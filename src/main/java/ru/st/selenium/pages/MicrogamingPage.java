@@ -170,7 +170,7 @@ public class MicrogamingPage extends InternalPage  {
 			//System.out.println("Игра загружена на:"+flashApp.callFlashObject("PercentLoaded")+"%, управление передано плагину");
 		} else { 
 			System.out.println("Не найден флэш с id=system");
-			noSuchElementExceptionAttachment("Не найден флэш с id=system"); makeScreenshot();
+			//noSuchElementExceptionAttachment("Не найден флэш с id=system"); makeScreenshot();
 			//return false; попытаться ещё раз войти в игру
 			   }
 		// выходим из фрэйма в корень, нам нужно нажать кнопку close, а она недоступна из фрэма с игрой
