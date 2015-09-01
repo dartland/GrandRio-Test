@@ -1,7 +1,7 @@
 package ru.st.selenium.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -99,6 +99,9 @@ public class RegistrationPage extends AnyPage {
 	public RegistrationPage ensurePageLoaded() {
 		super.ensurePageLoaded();
 		wait.until(presenceOfElementLocated(By.xpath(".//*[@id='reg_form']/h4"))); // надпись "регистрация"
+		wait.until(visibilityOfElementLocated(By.xpath(".//*[@id='reg_form']/h4"))); // надпись "регистрация"
+		
+		
 		return this;
 	}
 

@@ -29,7 +29,7 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 
    //********Тесты*************
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void AddNewUserOK() throws Exception {
 		User user = new User().setEmail("dartland3@rambler.ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
@@ -45,25 +45,22 @@ public class AddNewUser extends ru.st.selenium.pages.TestBase {
 		User user = new User().setEmail("dartland@rambler-ru").setPassword("123456");
 		app.getNavigationHelper().gotoRegistationPage();
 		app.getUserHelper().addNewUserAs(user);
-		//заделаем аттач из скриншота
-		//createAttachment("Заполнили поля рег. формы"); 	makeScreenshot();
-		//assertTrue(false);
 		assertTrue(app.getUserHelper().isNotRegisteredIn()); 
 
 	}	
     
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
     public void simpleTest() throws Exception {
 	       assertThat(2, is(2));
 	}	
 
-    @Test(priority = 4)
+    @Test(priority = 4, enabled = false)
     public void failedTest() {
     	assertTrue(false);
         fail("This test should be failed");
     }
 
-    @Test(priority = 5, dependsOnMethods = "failedTest")
+    @Test(priority = 5, dependsOnMethods = "failedTest", enabled = false)
     public void skippedByDependencyTest() {
     }	
 	
